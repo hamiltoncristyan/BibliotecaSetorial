@@ -97,15 +97,15 @@ h2 {
 .custom-radio .custom-control-input:checked~.custom-control-label::before,
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
   color: #ffffff;
-  background: #FF6F61;
-  border-color: #FF6F61;
+  background: #703910;
+  border-color: #703910;
   box-shadow: none;
 }
 
 .btn {
   color: #703910;
   background: #ffffff;
-  border: 1px solid #FF6F61;
+  border: 1px solid #703910;
 }
 
 .btn:hover,
@@ -258,7 +258,7 @@ h2 {
 }
 
 .nav .dropdown-menu a.active {
-  color: #353535;
+  color: #fff7f1;
   background: #f8f9fa;
 }
 
@@ -266,7 +266,7 @@ h2 {
 
   .nav,
   .nav .navbar {
-    background: #fff7f1 !important;
+    background: #703910 !important;
   }
 
   .nav .navbar-brand {
@@ -281,7 +281,7 @@ h2 {
 
   .nav .navbar-dark a.nav-link:hover,
   .nav .navbar-dark a.nav-link.active {
-    color: #000000;
+    color: #fff7f1;
   }
 }
 
@@ -321,6 +321,8 @@ h2 {
 
 .bottom-bar .logo a img {
   max-height: 60px;
+  max-width: 120px;
+
 }
 
 .bottom-bar .search {
@@ -332,7 +334,7 @@ h2 {
   height: 40px;
   padding: 0 15px;
   color: #666666;
-  border: 1px solid #FF6F61;
+  border: 1px solid #703910;
   border-radius: 4px;
 }
 
@@ -345,13 +347,13 @@ h2 {
   padding: 0 15px;
   border: none;
   background: none;
-  color: #FF6F61;
+  color: #703910;
   border-radius: 0 2px 2px 0;
 }
 
 .bottom-bar .search button:hover {
-  background: #FF6F61;
-  color: #ffffff;
+  background: #703910;
+  color: #fff7f1;
 }
 
 .bottom-bar .user {
@@ -365,12 +367,12 @@ h2 {
 
 .bottom-bar .user .cart i,
 .bottom-bar .user .wishlist i {
-  color: #FF6F61;
+  color: #703910;
 }
 
 .bottom-bar .user .cart span,
 .bottom-bar .user .wishlist span {
-  color: #FF6F61;
+  color: #703910;
   font-size: 15px;
 }
 
@@ -476,7 +478,7 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 111, 97, .7);
+  background: #703910;
   transition: all 0.3s;
   z-index: 1;
 }
@@ -964,8 +966,8 @@ h2 {
 }
 
 .product-view .product-search button:hover {
-  background: #FF6F61;
-  color: #ffffff;
+  background: #fff7f1;
+  color: #703910;
 }
 
 .product-view .product-short,
@@ -1836,8 +1838,8 @@ h2 {
 
 .my-account .nav.nav-pills .nav-link:hover,
 .my-account .nav.nav-pills .nav-link.active {
-  color: #ffffff;
-  background: #FF6F61;
+  color: #fff7f1;
+  background: #703910;
 }
 
 .my-account .nav.nav-pills .nav-link i {
