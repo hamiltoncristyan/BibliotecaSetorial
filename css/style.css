@@ -993,8 +993,8 @@ h2 {
 
 .product-view .product-short .dropdown .dropdown-toggle:hover,
 .product-view .product-price-range .dropdown .dropdown-toggle:hover {
-  color: #FF6F61;
-  border-color: #FF6F61;
+  color: #703910;
+  border-color: #fff7f1;
 }
 
 .product-view .product-short .dropdown .dropdown-toggle::after,
@@ -1018,15 +1018,15 @@ h2 {
 }
 
 .product-view .pagination .page-item .page-link {
-  color: #353535;
+  color: #703910;
   background: transparent;
-  border-color: #353535;
+  border-color: #703910;
 }
 
 .product-view .pagination .page-item:hover .page-link,
 .product-view .pagination .page-item.active .page-link {
-  color: #FF6F61;
-  background: #000000;
+  color: #703910;
+  background: #fff7f1;
 }
 
 @media (max-width: 991.98px) {
@@ -1109,7 +1109,7 @@ h2 {
 }
 
 .product-detail .product-content .ratting i {
-  color: #FF6F61;
+  color: #703910;
   font-size: 16px;
 }
 
@@ -1133,7 +1133,7 @@ h2 {
 
 .product-detail .product-content .price p {
   display: inline-block;
-  color: #FF6F61;
+  color: #703910;
   font-size: 30px;
   font-weight: 700;
   margin: 0;
