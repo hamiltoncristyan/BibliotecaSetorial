@@ -27,11 +27,11 @@
 
 <body>
   <!-- Top bar Start -->
-  
+
   <!-- Top bar End -->
 
   <!-- Nav Bar Start -->
-  
+
   <!-- Nav Bar End -->
 
   <!-- Bottom Bar Start -->
@@ -51,61 +51,31 @@
   <!-- Bottom Bar End -->
 
   <!-- Breadcrumb Start -->
- 
+
   <!-- Breadcrumb End -->
 
   <!-- Login Start -->
-  <div class="login">
-    <div class="container-fluid">
+  <div class="col-lg-6">
+    <div class="login-form">
       <div class="row">
-        <div class="col-lg-6">
-          <div class="register-form">
-            <div class="row">
-              <div class="col-md-6">
-                <label>Nome</label>
-                <input class="form-control" type="text" placeholder="Nome Completo">
-              </div>
-              <div class="col-md-6">
-                <label>E-mail</label>
-                <input class="form-control" type="text" placeholder="E-mail">
-              </div>
-              <div class="col-md-6">
-                <label>Número de Telefone</label>
-                <input class="form-control" type="text" placeholder="Número de Telefone">
-              </div>
-              <div class="col-md-6">
-                <label>Senha</label>
-                <input class="form-control" type="text" placeholder="Senha">
-              </div>
-              <div class="col-md-6">
-                <label>Repetir a Senha</label>
-                <input class="form-control" type="text" placeholder="Senha">
-              </div>
-              <div class="col-md-12">
-                <button class="btn">Enviar</button>
-              </div>
-            </div>
+        <form method="POST" action="/login">
+          <div class="col-md-6">
+            <label for="matricula">Matricula</label>
+            <input class="form-control" type="text" placeholder="Matrícula" name="matricula">
           </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="login-form">
-            <div class="row">
-              <div class="col-md-6">
-                <label>E-mail</label>
-                <input class="form-control" type="text" placeholder="E-mail">
-              </div>
-              <div class="col-md-6">
-                <label>Senha</label>
-                <input class="form-control" type="text" placeholder="Senha">
-              </div>
-              <div class="col-md-12">
-                <button class="btn">Enviar</button>
-              </div>
-            </div>
+          <div class="col-md-6">
+            <label for="senha">Senha</label>
+            <input class="form-control" type="password" placeholder="Senha" name="sbega">
           </div>
-        </div>
+          <div class="col-md-12">
+            <input type="submit" value="Enviar" />
+          </div>
+        </form>
       </div>
     </div>
+  </div>
+  </div>
+  </div>
   </div>
   <!-- Login End -->
 
