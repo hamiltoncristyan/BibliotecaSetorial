@@ -1,0 +1,106 @@
+from flask import Flask, g, render_template, request, redirect, url_for, flash, session
+import mysql.connector
+
+from models.usuario import Usuario
+from models.usuarioDAO import UsuarioDAO
+from models.exemplar import Exemplar
+from models.exemplarDAO import ExemplarDAO
+from models.livro import Livro
+from models.livroDAO import LivroDAO
+from models.emprestimo import Emprestimo
+from models.emprestimoDAO import EmprestimoDAO
+from suapapi import Suap
+
+app = Flask(__name__)
+
+app.secret_key = "secret"
+
+DB_HOST = "localhost"
+DB_USER = "root"
+DB_PASS = ""
+DB_NAME = "mydb"
+
+app.auth = {
+    # 'ação': {perfil:permissão}
+    'painel': {0: 1, 1: 1},
+    'logout': {0: 1, 1: 1},
+    'login': {0: 1, 1: 1}
+    #'cadastrar_produto': {0: 1, 1: 1}
+}
+
+
+#@app.before_request
+def autorizacao():
+    acao = request.path[1:]
+    acao = acao.split('/')
+
+    if len(acao) >= 1:
+        acao = acao[0]
+
+    acoes = app.auth.keys()
+    if acao in list(acoes):
+        if session.get('logado') is None:
+            return redirect(url_for('index'))
+        else:
+            tipo = session['logado']['tipo']
+            if app.auth[acao][tipo] == 0:
+                return redirect(url_for('painel'))
+
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = mysql.connector.connect(
+            host=DB_HOST,
+            user=DB_USER,
+            password=DB_PASS,
+            database=DB_NAME
+        )
+    return db
+
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('login.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        api = Suap()
+        print(request.form['matricula'])
+        print(request.form['senha'])
+        token = api.autentica(request.form['matricula'], request.form['senha'])
+        if token is not None:
+            session['token'] = token
+            print(token)
+            user = api.getMeusDados(token)
+            print(user)
+            return redirect(url_for('painel'))
+
+    return render_template('login.html')
+
+
+@app.route('/painel', methods=['GET', 'POST'])
+def painel():
+    daoLivro = LivroDAO(get_db())
+    livro_db = daoLivro.listar_livro()
+    return render_template("painel.html", livro=livro_db)
+
+
+@app.route('/logout')
+def logout():
+    session['logado'] = None
+    session.clear()
+    return redirect(url_for('index'))
+
+
+if __name__ == '__main__':
+    app.run(host='localhost', port=80, debug=True)

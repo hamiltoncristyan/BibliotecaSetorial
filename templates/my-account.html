@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <title>Minha Conta | BibliotecaSetorial</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS Libraries -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="static/lib/slick/slick.css" rel="stylesheet">
+  <link href="static/lib/slick/slick-theme.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Nav Bar Start -->
+  <div class="nav">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a href="#" class="navbar-brand">MENU</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+          <div class="navbar-nav mr-auto">
+            <a href="templates/index.html" class="nav-item nav-link">Início</a>
+            <a href="templates/login.html" class="nav-item nav-link">Login</a>
+            <a href="templates/cart.html" class="nav-item nav-link">Livros</a>
+            <a href="templates/my-account.html" class="nav-item nav-link active">Minha Conta</a>
+            <a href="templates/checkout.html" class="nav-item nav-link">Checkout</a>
+          </div>
+        </div>
+        <div class="navbar-nav ml-auto">
+          <div class="nav-item dropdown">
+            <a href="templates/index.html" class="nav-link dropdown-toggle" data-toggle="dropdown">Área do Usuário</a>
+            <div class="dropdown-menu">
+              <a href="templates/login.html" class="dropdown-item">Login</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </nav>
+  </div>
+  </div>
+  <!-- Nav Bar End -->
+
+  <!-- Bottom Bar Start -->
+  <div class="bottom-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-5 col-lg-8">
+          <div class="logo">
+            <a href="index.html">
+              <img src="logo/logo.png" alt="Logo">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bottom Bar End -->
+
+  <!-- Breadcrumb Start -->
+  <div class="breadcrumb-wrap">
+    <div class="container-fluid">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Livros</a></li>
+        <li class="breadcrumb-item active">Minha Conta</li>
+      </ul>
+    </div>
+  </div>
+  <!-- Breadcrumb End -->
+
+  <!-- My Account Start -->
+  <div class="my-account">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i
+                class="fa fa-tachometer-alt"></i>Dashboard</a>
+            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
+                class="fa fa-shopping-bag"></i>Empréstimos</a>
+            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
+                class="fa fa-user"></i>Detalhes da Conta</a>
+            <a class="nav-link" href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
+              <h4>Dashboard</h4>
+              <p>
+                Quantidade de Livros emprestados em todo o tempo
+                Quantidade de Livros emprestados nesse momento
+                Quantidade de Livros Disponíveis
+              </p>
+            </div>
+            <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>ID</th>
+                      <th>Livro</th>
+                      <th>Quantidade de Páginas</th>
+                      <th>Usuário Matrícula</th>
+                      <th>Status</th
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>009</td>
+                      <td>Android CokBook</td>
+                      <td>672 páginas</td>
+                      <td>20201084010009</td>
+                      <td><button class="btn">Devolver</button></td>
+                    </tr>
+                    <tr>
+                      <td>010</td>
+                      <td>Ensine seus filhos a Programar</td>
+                      <td>368 páginas</td>
+                      <td>20201084010100</td>
+                      <td><button class="btn">Devolver</button></td>
+                    </tr>
+                    <tr>
+                      <td>011</td>
+                      <td>Introdução a Informática</td>
+                      <td>640 páginas</td>
+                      <td>2020108401022</td>
+                      <td><button class="btn">Devolver</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+              <h4>Payment Method</h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In
+                efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique
+                viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus.
+                Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+              </p>
+            </div>
+            <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+              <h4>Detalhes da conta</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <input class="form-control" type="text" placeholder="Nome">
+                </div>
+                <div class="col-md-6">
+                  <input class="form-control" type="text" placeholder="Número de telefone">
+                </div>
+                <div class="col-md-6">
+                  <input class="form-control" type="text" placeholder="Email">
+                </div>
+                <div class="col-md-12">
+                  <button class="btn">Atualizar conta</button>
+                  <br><br>
+                </div>
+              </div>
+              <h4>Atualizar senha</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <input class="form-control" type="text" placeholder="Nova senha">
+                </div>
+                <div class="col-md-6">
+                  <input class="form-control" type="text" placeholder="Confirme a senha">
+                </div>
+                <div class="col-md-12">
+                  <button class="btn">Salvar alterações</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- My Account End -->
+
+  <!-- Back to Top -->
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="static/lib/easing/easing.min.js"></script>
+  <script src="static/lib/slick/slick.min.js"></script>
+
+  <!-- Template Javascript -->
+  <script src="static/js/main.js"></script>
+</body>
+
+</html>
