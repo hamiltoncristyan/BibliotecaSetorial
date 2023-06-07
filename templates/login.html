@@ -32,7 +32,7 @@
         <div class="col-md-5 col-lg-5">
           <div class="logo">
             <a href="templates/painel.html">
-              <img src="/logo/logo.png" alt="Logo">
+              <img src="static/logo/logo.png" alt="Logo">
             </a>
           </div>
         </div>
@@ -48,26 +48,22 @@
   <!-- Login Start -->
   <div class="col-lg-6">
     <div class="login-form">
-      <div class="row">
-        <form method="POST" action="/login">
-          <div class="col-md-6">
-            <label for="matricula">Matricula</label>
-            <input class="form-control" type="text" placeholder="Matrícula" name="matricula">
-          </div>
-          <div class="col-md-6">
-            <label for="senha">Senha</label>
-            <input class="form-control" type="password" placeholder="Senha" name="senha">
-          </div>
-          <div class="col-md-12">
-            <input type="submit" value="Enviar" />
-          </div>
-        </form>
-      </div>
+      <form method="POST" action="/login">
+        <div class="col-md-6">
+          <label for="matricula">Matricula</label>
+          <input class="form-control" type="text" placeholder="Matrícula" name="matricula">
+        </div>
+        <div class="col-md-6">
+          <label for="senha">Senha</label>
+          <input class="form-control" type="password" placeholder="Senha" name="senha">
+        </div>
+        <div class="col-md-12">
+          <input class="btn" type="submit" value="Enviar" />
+        </div>
+      </form>
     </div>
   </div>
-  </div>
-  </div>
-  </div>
+
   <!-- Login End -->
 
   <!-- Back to Top -->
