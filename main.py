@@ -118,7 +118,7 @@ def cadastrar_livro():
 def livros():
     dao = LivroDAO(get_db())
     livros_db = dao.listar_livro()
-    return render_template("cart.html", livros=livros_db)
+    return render_template("livros.html", livros=livros_db)
 
 
 @app.route('/logout')

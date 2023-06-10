@@ -37,9 +37,10 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto">
-            <a href="templates/index.html" class="nav-item nav-link active">Início</a>
+            <a href="/painel" class="nav-item nav-link active">Início</a>
             <a href="/login" class="nav-item nav-link">Login</a>
-            <a href="templates/cart.html" class="nav-item nav-link">Livros</a>
+            <a href="/livros" class="nav-item nav-link">Livros</a>
+            <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livros</a>
             <a href="templates/my-account.html" class="nav-item nav-link">Minha conta</a>
             <div class="nav-item dropdown">
             </div>
@@ -62,7 +63,7 @@
         <div class="col-md-3">
           <div class="logo">
             <a href="templates/index.html">
-              <img src="logo/logo.png" alt="Logo">
+              <img src="static/logo/logo.png" alt="Logo">
             </a>
           </div>
         </div>
@@ -106,11 +107,18 @@
                     <div class="product-short">
                       <div class="dropdown">
                         <div class="dropdown-toggle" data-toggle="dropdown">Curso</div>
-                        <div class="dropdown-menu dropdown-menu-right">
-                          <a href="#" class="dropdown-item">Agropecuária</a>
-                          <a href="#" class="dropdown-item">Informática</a>
-                          <a href="#" class="dropdown-item">Química</a>
-                        </div>
+                        <form action="" method="POST">
+                          <div class="dropdown-menu dropdown-menu-right">
+                            <select name="area">
+                              <option value="2" class="dropdown-item">Agropecuária</option>
+                              <option value="1" class="dropdown-item">Informática</option>
+                              <option value="3" class="dropdown-item">Química</option>
+                            </select>
+                          </div>
+                          <div class="col-md-12">
+                            <input class="btn" type="submit" value="Filtrar" />
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -141,8 +149,8 @@
                   {% for l in livros %}
                     <tr>
                       <td>
-                        <div class="img">
-                          <img src="{{ l[5] }}" alt="Capa do Livro {{ l[1] }}">
+                        <div>
+                          <img src="{{ l[5] }}" alt="Capa do Livro {{ l[1] }}" style="width: 160px; height: 230px;">
                         </div>
                       </td>
                       <td>{{ l[0] }}</td>

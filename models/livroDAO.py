@@ -28,7 +28,18 @@ class LivroDAO:
         except:
             return None
 
-    def listar_livro(self, nome=None):
+    def listar_livro(self):
+        try:
+            cursor = self.con.cursor()
+            sql = "SELECT * FROM Livro"
+            cursor.execute(sql)
+            livro = cursor.fetchall()
+            return livro
+
+        except:
+            return None
+
+    def listar_livro_nome(self, nome=None):
         try:
             cursor = self.con.cursor()
             if nome is not None:
@@ -46,3 +57,4 @@ class LivroDAO:
 
         except:
             return None
+
