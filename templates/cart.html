@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto">
             <a href="templates/index.html" class="nav-item nav-link active">Início</a>
-            <a href="templates/login.html" class="nav-item nav-link">Login</a>
+            <a href="/login" class="nav-item nav-link">Login</a>
             <a href="templates/cart.html" class="nav-item nav-link">Livros</a>
             <a href="templates/my-account.html" class="nav-item nav-link">Minha conta</a>
             <div class="nav-item dropdown">
@@ -122,151 +122,39 @@
   <div class="cart-page">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-16">
           <div class="cart-page-inner">
             <div class="table-responsive">
               <table class="table table-bordered">
                 <thead class="thead-dark">
                   <tr>
-                    <th>Livro</th>
+                    <th>Capa</th>
+                    <th>ID do Livro</th>
+                    <th>Nome</th>
+                    <th>Autor</th>
                     <th>Quant. de Páginas</th>
-                    <th>Quant. de Exemplares</th>
                     <th>Empréstimo</th>
                   </tr>
                 </thead>
                 <tbody class="align-middle">
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/ensine.jpg" alt="ensine"></a>
-                        <p>Ensine seus filhos a programarem</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/engenharia.jpg" alt="engenharia"></a>
-                        <p>Engenharia de Software</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/java.jpg" alt="java"></a>
-                        <p>Java como Programar</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/ajax.jpg" alt="ajax"></a>
-                        <p>Ajax</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/interacao.jpg" alt="interacao"></a>
-                        <p>Interação Humano - Computador</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/sistema.jpg" alt="sistema"></a>
-                        <p>Sistema de Banco de Dados</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/google.jpg" alt="google"></a>
-                        <p>Google Android</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/banco.jpg" alt="banco"></a>
-                        <p>Sistemas de Bancos de Dados</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/informatica.jpg" alt="informatica"></a>
-                        <p>Introdução a informática</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/cabeca.jpg" alt="cabeca"></a>
-                        <p>Use a cabeça servlets & JSP</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/android.jpg" alt="android"></a>
-                        <p>Android CookBook</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="img">
-                        <a href="#"><img src="livros/info/apsioo.jpg" alt="apsioo"></a>
-                        <p>Análise e Projeto de Sistemas e Informação Orientada a Objetos</p>
-                      </div>
-                    </td>
-                    <td> </td>
-                    <td>1</td>
-                    <td><button class="btn">Emprestar</button></td>
-                  </tr>
+                {% if livros %}
+                  {% for l in livros %}
+                    <tr>
+                      <td>
+                        <div class="img">
+                          <img src="{{ l[5] }}" alt="Capa do Livro {{ l[1] }}">
+                        </div>
+                      </td>
+                      <td>{{ l[0] }}</td>
+                      <td>{{ l[1] }}</td>
+                      <td>{{ l[2] }}</td>
+                      <td>{{ l[3] }}</td>
+                       <td><button class="btn">Emprestar</button></td>
+                    </tr>
+                   {% endfor %}
+                {% else %}
+                  <p>Nenhum item foi encontrado</p>
+                {% endif %}
                 </tbody>
               </table>
             </div>

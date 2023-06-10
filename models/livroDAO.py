@@ -5,9 +5,9 @@ class LivroDAO:
     def inserir(self, livro):
 
         try:
-            sql = "INSERT INTO livro(id_livro, nome, setor, autor, quantidade_pag, area_id_area) VALUES (%s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO livro (nome, autor, quantidade_pag, area_id_area, link_capa) VALUES(%s, %s, %s, %s, %s)"
             cursor = self.con.cursor()
-            cursor.execute(sql, (livro.id_livro, livro.nome, livro.setor, livro.autor, livro.quantidade_pag, livro.area_id_area))
+            cursor.execute(sql, (livro.nome, livro.autor, livro.quantidade_pag, livro.area_id_area, livro.link_capa))
 
             self.con.commit()
             id_livro = cursor.lastrowid
