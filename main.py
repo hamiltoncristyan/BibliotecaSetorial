@@ -75,14 +75,10 @@ def index():
 def login():
     if request.method == 'POST':
         api = Suap()
-        print(request.form['matricula'])
-        print(request.form['senha'])
         token = api.autentica(request.form['matricula'], request.form['senha'])
         if token is not None:
             session['token'] = token
-            print(token)
             user = api.getMeusDados(token)
-            print(user)
             return redirect(url_for('painel'))
 
     return render_template('login.html')
@@ -93,6 +89,36 @@ def painel():
     daoLivro = LivroDAO(get_db())
     livro_db = daoLivro.listar_livro()
     return render_template("painel.html", livro=livro_db)
+
+
+@app.route('/cadastrar_livro', methods=['GET', 'POST'])
+def cadastrar_livro():
+    if request.method == "POST":
+        nome = request.form['nome']
+        autor = request.form['autor']
+        area_id_area = request.form['area']
+        quantidade_pag = request.form['quantidade_pag']
+        link_capa = request.form['link_capa']
+
+        livro = Livro(nome, autor, quantidade_pag, area_id_area, link_capa)
+
+        dao = LivroDAO(get_db())
+        codigo = dao.inserir(livro)
+
+        if codigo > 0:
+            flash("Cadastrado com sucesso! Código %d" % codigo, "sucess")
+        else:
+            flash("Erro ao cadastrar!", "danger")
+
+    vartitulo = "cadastrar"
+    return render_template("cadastrar_livro.html", titulo=vartitulo)
+
+
+@app.route('/livros', methods=['GET', 'POST'])
+def livros():
+    dao = LivroDAO(get_db())
+    livros_db = dao.listar_livro()
+    return render_template("cart.html", livros=livros_db)
 
 
 @app.route('/logout')

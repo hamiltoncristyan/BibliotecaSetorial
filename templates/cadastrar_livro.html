@@ -31,7 +31,7 @@
       <div class="row align-items-center">
         <div class="col-md-5 col-lg-5">
           <div class="logo">
-            <a href="templates/painel.html">
+            <a href="/painel">
               <img src="static/logo/logo.png" alt="Logo">
             </a>
           </div>
@@ -48,14 +48,30 @@
   <!-- Login Start -->
   <div class="col-lg-6">
     <div class="login-form">
-      <form method="POST" action="/login">
+      <form method="POST" action="/cadastrar_livro">
         <div class="col-md-6">
-          <label for="matricula">Matricula</label>
-          <input class="form-control" type="text" placeholder="Matrícula" name="matricula">
+          <label for="nome">Nome</label>
+          <input class="form-control" type="text" placeholder="Nome do Livro" name="nome" required>
         </div>
         <div class="col-md-6">
-          <label for="senha">Senha</label>
-          <input class="form-control" type="password" placeholder="Senha" name="senha">
+          <label for="area">Área</label>
+          <select class="custom-select" placeholder="Selecione o Setor" name="area" required>
+            <option value="1">Informática</option>
+            <option value="2">Agropecuária</option>
+            <option value="3">Química</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="autor">Autor</label>
+          <input class="form-control" type="text" placeholder="Autor" name="autor" required>
+        </div>
+        <div class="col-md-6">
+          <label for="quantidade_pag">Quantidade de Páginas</label>
+          <input class="form-control" type="number" placeholder="Quantidade de páginas" name="quantidade_pag" required>
+        </div>
+        <div class="col-md-6">
+          <label for="link_capa">Link da Imagem da Capa do Livro</label>
+          <input class="form-control" type="text" placeholder="Link da imagem da capa" name="link_capa" required>
         </div>
         <div class="col-md-12">
           <input class="btn" type="submit" value="Enviar" />

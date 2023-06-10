@@ -29,7 +29,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `mydb`.`livro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
-  `id_livro` INT(11) NOT NULL,
+  `id_livro` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `setor` VARCHAR(45) NOT NULL,
   `autor` VARCHAR(45) NOT NULL,
@@ -51,7 +51,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `mydb`.`exemplar`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`exemplar` (
-  `id_exemplar` INT(11) NOT NULL,
+  `id_exemplar` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `quantidade` VARCHAR(45) NOT NULL,
   `livro_id_livro` INT(11) NOT NULL,
@@ -88,7 +88,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `mydb`.`emprestimo` (
   `exemplar_id_exemplar` INT(11) NOT NULL,
   `usuario_matricula` INT(11) NOT NULL,
-  `emprestimo_id` VARCHAR(45) NOT NULL,
+  `emprestimo_id` VARCHAR(45) NOT NULL AUTO_INCREMENT,
   `data_emprestimo` VARCHAR(45) NOT NULL,
   `data_devolucao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`exemplar_id_exemplar`, `usuario_matricula`, `emprestimo_id`),
