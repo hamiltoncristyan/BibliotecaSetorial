@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`area` (
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_area`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -31,11 +32,10 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
   `id_livro` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
-  `setor` VARCHAR(45) NOT NULL,
   `autor` VARCHAR(45) NOT NULL,
   `quantidade_pag` INT(11) NOT NULL,
   `area_id_area` INT(11) NOT NULL,
-  `link_capa` VARCHAR(200) NOT NULL,
+  `link_capa` VARCHAR(350) NOT NULL,
   PRIMARY KEY (`id_livro`, `area_id_area`),
   INDEX `fk_obra_setor1_idx` (`area_id_area` ASC) ,
   CONSTRAINT `fk_obra_setor1`
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -78,32 +79,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
   `vinculo` VARCHAR(45) NOT NULL,
   `link_foto` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`matricula`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`emprestimo`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`emprestimo` (
-  `exemplar_id_exemplar` INT(11) NOT NULL,
-  `usuario_matricula` INT(11) NOT NULL,
-  `emprestimo_id` VARCHAR(45) NOT NULL AUTO_INCREMENT,
-  `data_emprestimo` VARCHAR(45) NOT NULL,
-  `data_devolucao` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`exemplar_id_exemplar`, `usuario_matricula`, `emprestimo_id`),
-  INDEX `fk_exemplar_has_usuario_usuario1_idx` (`usuario_matricula` ASC) ,
-  INDEX `fk_exemplar_has_usuario_exemplar1_idx` (`exemplar_id_exemplar` ASC) ,
-  CONSTRAINT `fk_exemplar_has_usuario_exemplar1`
-    FOREIGN KEY (`exemplar_id_exemplar`)
-    REFERENCES `mydb`.`exemplar` (`id_exemplar`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_exemplar_has_usuario_usuario1`
-    FOREIGN KEY (`usuario_matricula`)
-    REFERENCES `mydb`.`usuario` (`matricula`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

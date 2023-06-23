@@ -5,11 +5,9 @@
   <meta charset="utf-8">
   <title>BibliotecaSetorial</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="eCommerce HTML Template Free Download" name="keywords">
-  <meta content="eCommerce HTML Template Free Download" name="description">
 
-  <!-- Favicon -->
-  <link href="favicon.ico" rel="icon">
+  <!-- Icon -->
+  <link href="static/logo/pen.png" rel="icon" type="image/png" >
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
@@ -173,355 +171,33 @@
   <div class="Livros mais requisitados">
     <div class="container-fluid">
       <div class="section-header">
-        <h1>LIVROS MAIS REQUISITADOS</h1>
+        <h1>LIVROS DISPONÍVEIS</h1>
       </div>
       <div class="row align-items-center product-slider product-slider-4">
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Ajax, Rich Internet Applications Web para programadores</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
+        {% if livro %}
+          {% for l in livro %}
+          <div class="col-lg-3">
+            <div class="product-item">
+              <div class="product-title">
+                <a href="#">{{ l[1] }}</a>
               </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/ajax.jpg" alt="
-                  ajax" style="width: 300px; height: 400px;">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
+              <div class="product-image">
+                <a href="product-detail.html">
+                  <img src="{{ l[5] }}" alt="Capa do Livro {{ l[1] }}" style="width: 265px; height: 320px;">
+                </a>
+              <div class="product-price">
+                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Emprétimo</a>
               </div>
-            </div>
-            <div class="product-price">
-
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Emprétimo</a>
             </div>
           </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Análise e Projetos de Sistemas de Informação Orientada a Objetos</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/apsioo.jpg" alt="apsioo">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Android CookBook</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/android.jpg" alt="android">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Engenharia de Software</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/engenharia.jpg" alt="engenharia">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Ensine seus filhos a programar</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/ensine.jpg" alt="ensine">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
       </div>
+          {% endfor %}
+        {% else %}
+          <p>Nenhum item foi encontrado</p>
+        {% endif %}
     </div>
   </div>
   <!-- Featured Product End -->
-
-  <!-- Newsletter Start -->
-
-  <!-- Newsletter End -->
-
-  <!-- Recent Product Start -->
-  <div class="Livros procurados recentemente">
-    <div class="container-fluid">
-      <div class="section-header">
-        <h1>LIVROS PROCURADOS RECENTEMENTE</h1>
-      </div>
-      <div class="row align-items-center product-slider product-slider-4">
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Google Android</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/google.jpg" alt="google">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Interação Humano - Computador</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/interacao.jpg" alt="interacao">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Introdução à Informática </a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/informatica.jpg" alt="informatica" style="width: 300px; height: 400px;">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Java como programar</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/java.jpg" alt="java">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Sistema de Banco de Dados</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/sistema.jpg" alt="sistema">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Sistemas de Banco de Dados</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/banco.jpg" alt="banco">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="product-item">
-            <div class="product-title">
-              <a href="#">Use a cabeça Servlets & JSP</a>
-              <div class="ratting">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-            <div class="product-image">
-              <a href="product-detail.html">
-                <img src="static/livros/info/cabeca.jpg" alt="cabeca">
-              </a>
-              <div class="product-action">
-                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                <a href="#"><i class="fa fa-heart"></i></a>
-                <a href="#"><i class="fa fa-search"></i></a>
-              </div>
-            </div>
-            <div class="product-price">
-              <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Empréstimo</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Recent Product End -->
 
   <!-- Review Start -->
   <div class="review">
