@@ -25,11 +25,11 @@ app.auth = {
     'painel': {0: 1, 1: 1},
     'logout': {0: 1, 1: 1},
     'login': {0: 1, 1: 1}
-    #'cadastrar_produto': {0: 1, 1: 1}
+    # 'cadastrar_produto': {0: 1, 1: 1}
 }
 
 
-#@app.before_request
+# @app.before_request
 def autorizacao():
     acao = request.path[1:]
     acao = acao.split('/')
@@ -71,14 +71,21 @@ def index():
     return render_template('login.html')
 
 
+global token
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         api = Suap()
-        token = api.autentica(request.form['matricula'], request.form['senha'])
+        matricula = request.form['matricula']
+        senha = request.form['senha']
+        token = api.autentica(matricula, senha)
+        session['token'] = token
         if token is not None:
             session['token'] = token
             user = api.getMeusDados(token)
+            print(user)
             return redirect(url_for('painel'))
 
     return render_template('login.html')
@@ -89,6 +96,18 @@ def painel():
     daoLivro = LivroDAO(get_db())
     livro_db = daoLivro.listar_livro()
     return render_template("painel.html", livro=livro_db)
+
+
+@app.route('/minha_conta', methods=['GET', 'POST'])
+def minha_conta():
+    token = session.get('token')
+    api = Suap()
+    user = api.getMeusDados(token)
+    url_foto_150x200 = user['url_foto_150x200']
+    tipo_vinculo = user['tipo_vinculo']
+    nome = user['vinculo']['nome']
+    matricula = user['matricula']
+    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome,  matricula=matricula, tipo_vinculo=tipo_vinculo)
 
 
 @app.route('/cadastrar_livro', methods=['GET', 'POST'])
