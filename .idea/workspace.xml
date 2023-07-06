@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e48f40db-aa72-45fe-8cd5-213d5078cd2a" name="Changes" comment="Finalização da Função Listar Livros">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/my-account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my-account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/painel.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/painel.html" afterDir="false" />
-    </list>
+    <list default="true" id="e48f40db-aa72-45fe-8cd5-213d5078cd2a" name="Changes" comment="Finalização da Função Listar Livros" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
