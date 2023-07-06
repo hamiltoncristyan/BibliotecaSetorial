@@ -26,7 +26,8 @@ app.auth = {
     'cadastrar_produto': {0: 1, 1: 1}
 }
 
-@app.before_request
+
+#@app.before_request
 def autorizacao():
     acao = request.path[1:]
     acao = acao.split('/')
@@ -43,6 +44,7 @@ def autorizacao():
             if app.auth[acao][tipo] == 0:
                 return redirect(url_for('painel'))
 
+
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -53,22 +55,26 @@ def get_db():
             database=DB_NAME
         )
     return db
-  
+
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template("login.html", titulo="Login")
+
 
 @app.route('/logout')
 def logout():
     session['logado'] = None
     session.clear()
     return redirect(url_for('index'))
+
 
 @app.route('/home')
 def painel():
