@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Icon -->
-  <link href="static/logo/pen.png" rel="icon" type="image/png" >
+  <link href="static/logo/logo/pen.png" rel="icon" type="image/png" >
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
@@ -36,18 +36,17 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto">
-            <a href="templates/index.html" class="nav-item nav-link">Início</a>
-            <a href="templates/login.html" class="nav-item nav-link">Login</a>
-            <a href="templates/cart.html" class="nav-item nav-link">Livros</a>
-            <a href="templates/my-account.html" class="nav-item nav-link active">Minha Conta</a>
-            <a href="templates/checkout.html" class="nav-item nav-link">Checkout</a>
+            <a href="/painel" class="nav-item nav-link">Início</a>
+            <a href="/login" class="nav-item nav-link">Login</a>
+            <a href="/livros" class="nav-item nav-link">Livros</a>
+            <a href="/minha_conta" class="nav-item nav-link active">Minha Conta</a>
           </div>
         </div>
         <div class="navbar-nav ml-auto">
           <div class="nav-item dropdown">
-            <a href="templates/index.html" class="nav-link dropdown-toggle" data-toggle="dropdown">Área do Usuário</a>
+            <a href="/minha_conta" class="nav-link dropdown-toggle" data-toggle="dropdown">Área do Usuário</a>
             <div class="dropdown-menu">
-              <a href="templates/login.html" class="dropdown-item">Login</a>
+              <a href="/login" class="dropdown-item">Login</a>
             </div>
           </div>
         </div>
@@ -63,7 +62,7 @@
       <div class="row align-items-center">
         <div class="col-md-5 col-lg-8">
           <div class="logo">
-            <a href="index.html">
+            <a href="/painel">
               <img src="static/logo/logo.png" alt="Logo">
             </a>
           </div>
@@ -77,9 +76,8 @@
   <div class="breadcrumb-wrap">
     <div class="container-fluid">
       <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Livros</a></li>
-        <li class="breadcrumb-item active">Minha Conta</li>
+        <li class="breadcrumb-item"><a href="/painel">Home</a></li>
+        <li class="breadcrumb-item"><a href="/livros">Livros</a></li>
       </ul>
     </div>
   </div>
@@ -89,15 +87,13 @@
   <div class="my-account">
     <div class="container-fluid">
       <div class="row">
-
-
         <div class="col-md-3">
           <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
             <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i
                 class="fa fa-tachometer-alt"></i>Dashboard</a>
             <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
                 class="fa fa-shopping-bag"></i>Empréstimos</a>
-            <a class="nav-link" href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
+            <a class="nav-link" href="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
           </div>
         </div>
         <div class="col-md-9">
@@ -120,7 +116,7 @@
                       <th>Livro</th>
                       <th>Quantidade de Páginas</th>
                       <th>Usuário Matrícula</th>
-                      <th>Status</th
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -129,20 +125,6 @@
                       <td>Android CokBook</td>
                       <td>672 páginas</td>
                       <td>20201084010009</td>
-                      <td><button class="btn">Devolver</button></td>
-                    </tr>
-                    <tr>
-                      <td>010</td>
-                      <td>Ensine seus filhos a Programar</td>
-                      <td>368 páginas</td>
-                      <td>20201084010100</td>
-                      <td><button class="btn">Devolver</button></td>
-                    </tr>
-                    <tr>
-                      <td>011</td>
-                      <td>Introdução a Informática</td>
-                      <td>640 páginas</td>
-                      <td>2020108401022</td>
                       <td><button class="btn">Devolver</button></td>
                     </tr>
                   </tbody>

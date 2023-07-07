@@ -1,5 +1,6 @@
 from flask import Flask, g, render_template, request, redirect, url_for, flash, session
 import mysql.connector
+from datetime import timedelta
 
 from models.usuario import Usuario
 from models.usuarioDAO import UsuarioDAO
@@ -87,6 +88,7 @@ def login():
             user = api.getMeusDados(token)
             print(user)
             return redirect(url_for('painel'))
+            app.permanent_session_lifetime = timedelta(minutes=20)
 
     return render_template('login.html')
 
