@@ -1,6 +1,7 @@
 from flask import Flask, g, render_template, request, redirect, url_for, flash, session
 import mysql.connector
 from datetime import timedelta
+import bcrypt
 
 from models.usuario import Usuario
 from models.usuarioDAO import UsuarioDAO
@@ -28,6 +29,9 @@ app.auth = {
     'login': {0: 1, 1: 1}
     # 'cadastrar_produto': {0: 1, 1: 1}
 }
+
+
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 
 # @app.before_request
@@ -60,6 +64,21 @@ def get_db():
     return db
 
 
+def user_exits(matricula):
+    connection = get_db()
+    cursor = connection.cursor()
+
+    query = "SELECT * FROM usuario WHERE matricula = %s"
+    cursor.execute(query, (matricula,))
+
+    user_data = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    return user_data is not None
+
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
@@ -83,12 +102,43 @@ def login():
         senha = request.form['senha']
         token = api.autentica(matricula, senha)
         session['token'] = token
+        user = api.getMeusDados(token)
+        user[matricula] = matricula
+
+        if user_exits(matricula):
+            session['matricula'] = matricula
+        else:
+
+            hashed_senha = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
+
+            if user['vinculo'] == "professor":
+                vinculo = 0
+            else:
+                vinculo = 1
+
+            nome = user['nome']
+            curso = user['curso']
+            email = user['email_academico']
+            link_foto = "https://suap.ifrn.edu.br" + user['url_foto_150x200']
+            connection = get_db()
+            cursor = connection.cursor()
+
+            query = "INSERT INTO usuario (matricula, nome, curso, email, vinculo, link_foto, senha) VALUES (%s, %s, %s)"
+            values = (matricula, nome, curso, email, vinculo, link_foto, hashed_senha)
+
+            cursor.execute(query, values)
+            connection.commit()
+
+            cursor.close()
+            connection.close()
+
+            session['matricula'] = matricula
+
         if token is not None:
             session['token'] = token
             user = api.getMeusDados(token)
             print(user)
             return redirect(url_for('painel'))
-            app.permanent_session_lifetime = timedelta(minutes=20)
 
     return render_template('login.html')
 
@@ -142,6 +192,15 @@ def livros():
     return render_template("livros.html", livros=livros_db)
 
 
+@app.route('/consulta/<area_id_area>', methods=['GET', 'POST'])
+def consulta(area_id_area):
+    if request.method == "GET":
+        area_id_area = request.args.get(area_id_area)
+        dao = LivroDAO(get_db)
+        livros_db = dao.listar_livro_area(area_id_area)
+        return render_template('livros.html', livros=livros_db)
+
+
 @app.route('/logout')
 def logout():
     session['logado'] = None
@@ -150,4 +209,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(host='10.177.1.136', port=80, debug=True)
+    app.run(host='192.168.0.106', port=80, debug=True)

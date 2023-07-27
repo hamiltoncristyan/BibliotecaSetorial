@@ -39,6 +39,18 @@ class LivroDAO:
         except:
             return None
 
+    def listar_livro_area(self, area_id_area):
+        try:
+            cursor = self.con.cursor()
+            if area_id_area is not None:
+                sql= "SELECT * FROM Livro WHERE area_id_area=%s"
+                cursor.execute(sql, (area_id_area))
+                livro_area = cursor.fetchall()
+                return livro_area
+        except:
+            return None
+
+
     def listar_livro_nome(self, nome=None):
         try:
             cursor = self.con.cursor()
