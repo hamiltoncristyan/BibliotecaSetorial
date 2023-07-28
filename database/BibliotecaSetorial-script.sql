@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -12,13 +11,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `bibliotecasetorial` DEFAULT CHARACTER SET utf8 ;
+USE `bibliotecasetorial` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`area`
+-- Table `bibliotecasetorial`.`area`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`area` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`area` (
   `id_area` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_area`))
@@ -28,9 +27,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`livro`
+-- Table `bibliotecasetorial`.`livro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`livro` (
   `id_livro` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `autor` VARCHAR(45) NOT NULL,
@@ -50,9 +49,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`usuario`
+-- Table `bibliotecasetorial`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`usuario` (
   `matricula` INT(11) NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
   `curso` VARCHAR(45) NOT NULL,
@@ -66,9 +65,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`emprestimo`
+-- Table `bibliotecasetorial`.`emprestimo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`emprestimo` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`emprestimo` (
   `livro_id_livro` INT(11) NOT NULL,
   `livro_area_id_area` INT(11) NOT NULL,
   `usuario_matricula` INT(11) NOT NULL,
@@ -93,9 +92,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`exemplar`
+-- Table `bibliotecasetorial`.`exemplar`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`exemplar` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`exemplar` (
   `id_exemplar` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `quantidade` VARCHAR(45) NOT NULL,
@@ -129,13 +128,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `bibliotecasetorial` DEFAULT CHARACTER SET utf8 ;
+USE `bibliotecasetorial` ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`area`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`area` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`area` (
   `id_area` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_area`))
@@ -144,9 +143,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`livro`
+-- Table `bibliotecasetorial`.`livro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`livro` (
   `id_livro` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `area` VARCHAR(45) NOT NULL,
@@ -166,9 +165,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`exemplar`
+-- Table `bibliotecasetorial`.`exemplar`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`exemplar` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`exemplar` (
   `id_exemplar` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `quantidade` VARCHAR(45) NOT NULL,
@@ -186,9 +185,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`usuario`
+-- Table `bibliotecasetorial`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`usuario` (
   `matricula` INT(11) NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
   `curso` VARCHAR(45) NOT NULL,
@@ -201,9 +200,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`emprestimo`
+-- Table `bibliotecasetorial`.`emprestimo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`emprestimo` (
+CREATE TABLE IF NOT EXISTS `bibliotecasetorial`.`emprestimo` (
   `livro_id_livro` INT(11) NOT NULL,
   `livro_area_id_area` INT(11) NOT NULL,
   `usuario_matricula` INT(11) NOT NULL,
@@ -230,4 +229,3 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
->>>>>>> 104857fe434477e0f049b738a46e8a37de223f5a
