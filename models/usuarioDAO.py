@@ -12,8 +12,7 @@ class UsuarioDAO:
             usuario.senha))
 
             self.con.commit()
-            matricula = cursor.lastrowid
-            return matricula
+            return 1
 
         except:
             return 0
@@ -23,11 +22,11 @@ class UsuarioDAO:
             sql = "SELECT * FROM Usuario WHERE matricula = %s"
 
             cursor = self.con.cursor()
-            cursor.execute(sql, (matricula))
+            cursor.execute(sql, (matricula,))
 
-            user_data = cursor.fetchone
+            user_data = cursor.fetchone()
 
-            return user_data is not None
+            return user_data
 
         except:
             return None

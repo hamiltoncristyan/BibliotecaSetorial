@@ -28,7 +28,7 @@ app.auth = {
     'painel_aluno': {0: 0, 1: 1},
     'logout': {0: 1, 1: 1},
     'login': {0: 1, 1: 1},
-    #'cadastrar_livro': {0: 1, 1: 0}
+    'cadastrar_livro': {0: 1, 1: 0}
 }
 
 
@@ -85,43 +85,54 @@ def login():
         api = Suap()
         matricula = request.form['matricula']
         senha = request.form['senha']
+
         token = api.autentica(matricula, senha)
-        session['token'] = token
-        user = api.getMeusDados(token)
-        user['vinculo']['matricula'] = matricula
-        print(user)
 
-        daoUsuario = UsuarioDAO(get_db())
-        usuario = daoUsuario.verificar_matricula(request.form['matricula'])
+        if token:
+            user = api.getMeusDados(token)
+            print(user)
 
-        if user['tipo_vinculo'] == "Professor":
-            return redirect(url_for('painel_professor'))
-            vinculo = 0
+            daoUsuario = UsuarioDAO(get_db())
+            #user_db = daoUsuario.verificar_matricula(request.form['matricula'])
+            user_db = None
+            if user_db is None:
+                matricula = request.form['matricula']
+                matricula = int(matricula)
+                nome = user['vinculo']['nome']
+                curso = user['vinculo']['curso']
+                email = user['email']
+                link_foto = "https://suap.ifrn.edu.br" + user['url_foto_150x200']
+                senha = request.form['senha']
 
-        else:
+                vinculo = 0
+                if user['tipo_vinculo'] == 'Aluno':
+                    vinculo = 1
+
+                user_db = Usuario(matricula, nome, curso, email, vinculo, link_foto, senha)
+                codigo = daoUsuario.inserir(user_db)
+                #user_db = daoUsuario.verificar_matricula(matricula)
+                #flash(f'Usuário cadastrado {codigo}' % codigo)
+
+            # session['logado'] = {
+            #     'matricula': user_db[0],
+            #     'nome': user_db[1],
+            #     'curso': user_db[2],
+            #     'email': user_db[3],
+            #     'vinculo': user_db[4],
+            #     'link_foto': user_db[5]
+            # }
+            session['logado'] = {
+                'matricula': user_db.matricula,
+                'nome': user_db.nome,
+                'curso': user_db.curso,
+                'email': user_db.email,
+                'vinculo': user_db.vinculo,
+                'link_foto': user_db.link_foto
+            }
+            if user_db.vinculo == 0:
+                return redirect(url_for('painel_professor'))
+
             return redirect(url_for('painel_aluno'))
-            vinculo = 1
-
-        if usuario is not None:
-
-            session['vinculo']['matricula'] = matricula
-            session['token'] = token
-
-        else:
-
-            matricula = request.form['matricula']
-            matricula = int(matricula)
-            nome = user['vinculo']['nome']
-            curso = user['vinculo']['curso']
-            email = user['email']
-            link_foto = "https://suap.ifrn.edu.br" + user['url_foto_150x200']
-            senha = request.form['senha']
-
-            usuario = Usuario(matricula, nome, curso, email, vinculo, link_foto, senha)
-
-            dao = UsuarioDAO(get_db())
-            codigo = dao.inserir(usuario)
-
 
 
 @app.route('/painel_aluno', methods=['GET', 'POST'])
@@ -190,4 +201,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(host='10.177.1.21', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
