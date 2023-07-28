@@ -1,7 +1,7 @@
 from flask import Flask, g, render_template, request, redirect, url_for, flash, session
 import mysql.connector
 from datetime import timedelta
-import bcrypt
+
 
 from models.usuario import Usuario
 from models.usuarioDAO import UsuarioDAO
@@ -24,17 +24,18 @@ DB_NAME = "mydb"
 
 app.auth = {
     # 'ação': {perfil:permissão}
-    'painel': {0: 1, 1: 1},
+    'painel_professor': {0: 1, 1: 0},
+    'painel_aluno': {0: 0, 1: 1},
     'logout': {0: 1, 1: 1},
-    'login': {0: 1, 1: 1}
-    # 'cadastrar_produto': {0: 1, 1: 1}
+    'login': {0: 1, 1: 1},
+    #'cadastrar_livro': {0: 1, 1: 0}
 }
 
 
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 
-# @app.before_request
+#@app.before_request
 def autorizacao():
     acao = request.path[1:]
     acao = acao.split('/')
@@ -63,22 +64,6 @@ def get_db():
         )
     return db
 
-
-def user_exits(matricula):
-    connection = get_db()
-    cursor = connection.cursor()
-
-    query = "SELECT * FROM usuario WHERE matricula = %s"
-    cursor.execute(query, (matricula,))
-
-    user_data = cursor.fetchone()
-
-    cursor.close()
-    connection.close()
-
-    return user_data is not None
-
-
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
@@ -104,47 +89,46 @@ def login():
         session['token'] = token
         user = api.getMeusDados(token)
         user[matricula] = matricula
+        print(user)
 
-        if user_exits(matricula):
+        daoUsuario = UsuarioDAO(get_db())
+        usuario = daoUsuario.verificar_matricula(request.form['matricula'])
+
+        if usuario is not None:
+
             session['matricula'] = matricula
+            session['token'] = token
+            return render_template('painel')
         else:
 
-            hashed_senha = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
-
-            if user['vinculo'] == "professor":
+            if user['tipo_vinculo'] == "Professor":
                 vinculo = 0
+
             else:
                 vinculo = 1
 
-            nome = user['nome']
-            curso = user['curso']
-            email = user['email_academico']
+            nome = user['nome_usual']
+            curso = user['vinculo']['curso']
+            email = user['email']
             link_foto = "https://suap.ifrn.edu.br" + user['url_foto_150x200']
-            connection = get_db()
-            cursor = connection.cursor()
+            senha = request.form['senha']
 
-            query = "INSERT INTO usuario (matricula, nome, curso, email, vinculo, link_foto, senha) VALUES (%s, %s, %s)"
-            values = (matricula, nome, curso, email, vinculo, link_foto, hashed_senha)
+            usuario = Usuario(matricula, nome, curso, email, vinculo, link_foto, senha)
 
-            cursor.execute(query, values)
-            connection.commit()
+            dao = UsuarioDAO(get_db())
+            codigo = dao.inserir(usuario)
 
-            cursor.close()
-            connection.close()
+            if vinculo == 0:
+                return render_template('painel_professor')
 
-            session['matricula'] = matricula
-
-        if token is not None:
-            session['token'] = token
-            user = api.getMeusDados(token)
-            print(user)
-            return redirect(url_for('painel'))
+            else:
+                return render_template('painel.html')
 
     return render_template('login.html')
 
 
-@app.route('/painel', methods=['GET', 'POST'])
-def painel():
+@app.route('/painel_aluno', methods=['GET', 'POST'])
+def painel_aluno():
     daoLivro = LivroDAO(get_db())
     livro_db = daoLivro.listar_livro()
     return render_template("painel.html", livro=livro_db)
