@@ -94,19 +94,20 @@ def login():
         daoUsuario = UsuarioDAO(get_db())
         usuario = daoUsuario.verificar_matricula(request.form['matricula'])
 
+        if user['tipo_vinculo'] == "Professor":
+            return redirect(url_for('painel_professor'))
+            vinculo = 0
+
+        else:
+            return redirect(url_for('painel_aluno'))
+            vinculo = 1
+
         if usuario is not None:
 
             session['vinculo']['matricula'] = matricula
             session['token'] = token
-            return render_template('painel')
+
         else:
-
-            if user['tipo_vinculo'] == "Professor":
-                vinculo = 0
-
-            else:
-                vinculo = 1
-
 
             matricula = request.form['matricula']
             matricula = int(matricula)
@@ -121,20 +122,13 @@ def login():
             dao = UsuarioDAO(get_db())
             codigo = dao.inserir(usuario)
 
-            if vinculo == 0:
-                return render_template('painel_professor')
-
-            else:
-                return render_template('painel.html')
-
-    return render_template('login.html')
 
 
 @app.route('/painel_aluno', methods=['GET', 'POST'])
 def painel_aluno():
     daoLivro = LivroDAO(get_db())
     livro_db = daoLivro.listar_livro()
-    return render_template("painel.html", livro=livro_db)
+    return render_template("painel_aluno.html", livro=livro_db)
 
 
 @app.route('/minha_conta', methods=['GET', 'POST'])
