@@ -88,7 +88,7 @@ def login():
         token = api.autentica(matricula, senha)
         session['token'] = token
         user = api.getMeusDados(token)
-        user[matricula] = matricula
+        user['vinculo']['matricula'] = matricula
         print(user)
 
         daoUsuario = UsuarioDAO(get_db())
@@ -96,7 +96,7 @@ def login():
 
         if usuario is not None:
 
-            session['matricula'] = matricula
+            session['vinculo']['matricula'] = matricula
             session['token'] = token
             return render_template('painel')
         else:
@@ -107,7 +107,10 @@ def login():
             else:
                 vinculo = 1
 
-            nome = user['nome_usual']
+
+            matricula = request.form['matricula']
+            matricula = int(matricula)
+            nome = user['vinculo']['nome']
             curso = user['vinculo']['curso']
             email = user['email']
             link_foto = "https://suap.ifrn.edu.br" + user['url_foto_150x200']
@@ -193,4 +196,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.106', port=80, debug=True)
+    app.run(host='10.177.1.21', port=80, debug=True)
