@@ -52,7 +52,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `mydb`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
-  `matricula` INT(11) NOT NULL,
+  `matricula` BIGINT(20) NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
   `curso` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -70,7 +70,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `mydb`.`emprestimo` (
   `livro_id_livro` INT(11) NOT NULL,
   `livro_area_id_area` INT(11) NOT NULL,
-  `usuario_matricula` INT(11) NOT NULL,
+  `usuario_matricula` BIGINT(20) NOT NULL,
   `data_emprestimo` DATE NOT NULL,
   `data_devolucao` DATE NOT NULL,
   `estado` VARCHAR(20) NOT NULL,
