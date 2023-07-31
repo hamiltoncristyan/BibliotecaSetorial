@@ -109,7 +109,7 @@ def login():
                 user_db = Usuario(matricula, nome, curso, email, vinculo, link_foto, senha)
                 codigo = daoUsuario.inserir(user_db)
                 user_db = daoUsuario.verificar_matricula(matricula)
-                #flash(f'Usuário cadastrado {codigo}' % codigo)
+                flash("Usuário Cadastrado! Código %d" % codigo, 'sucess')
 
             session['logado'] = {
                 'matricula': user_db[0],

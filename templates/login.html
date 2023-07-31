@@ -43,6 +43,15 @@
 
   <!-- Login Start -->
   <div class="col-lg-6">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     <div class="login-form">
       <form method="POST" action="/login">
         <div class="col-md-6">
