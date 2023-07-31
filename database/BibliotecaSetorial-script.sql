@@ -90,27 +90,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`emprestimo` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-
--- -----------------------------------------------------
--- Table `mydb`.`exemplar`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`exemplar` (
-  `id_exemplar` INT(11) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `quantidade` VARCHAR(45) NOT NULL,
-  `livro_id_livro` INT(11) NOT NULL,
-  `livro_area_id_area` INT(11) NOT NULL,
-  PRIMARY KEY (`id_exemplar`),
-  INDEX `fk_exemplar_obra1_idx` (`livro_id_livro` ASC, `livro_area_id_area` ASC) ,
-  CONSTRAINT `fk_exemplar_obra1`
-    FOREIGN KEY (`livro_id_livro` , `livro_area_id_area`)
-    REFERENCES `mydb`.`livro` (`id_livro` , `area_id_area`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
