@@ -126,6 +126,7 @@ def login():
 
 @app.route('/painel', methods=['GET', 'POST'])
 def painel():
+
     if session['logado']['vinculo'] == 0:
         mostrar_div = True
     else:
@@ -152,7 +153,7 @@ def minha_conta():
     nome = user[1]
     matricula = user[0]
 
-    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome,  matricula=matricula, tipo_vinculo=tipo_vinculo, mostrar_div = mostrar_div)
+    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome,  matricula=matricula, tipo_vinculo=tipo_vinculo, mostrar_div=mostrar_div)
 
 
 @app.route('/cadastrar_livro', methods=['GET', 'POST'])
@@ -193,12 +194,15 @@ def livros():
     return render_template("livros.html", livros=livros_db, mostrar_div = mostrar_div)
 
 
-@app.route('/consulta/<area_id_area>', methods=['GET', 'POST'])
-def consulta(area_id_area):
-    if request.method == "GET":
-        area_id_area = request.args.get(area_id_area)
+@app.route('/pesquisar_livro', methods=['GET', 'POST'])
+def pesquisar_livro():
+    if request.method == "POST":
+        print(request.form['livro'])
+        livro = request.form['livro']
+        print(livro)
         dao = LivroDAO(get_db)
-        livros_db = dao.listar_livro_area(area_id_area)
+        livros_db = dao.pesquisar_livro(livro)
+        print(livros_db)
         return render_template('livros.html', livros=livros_db)
 
 

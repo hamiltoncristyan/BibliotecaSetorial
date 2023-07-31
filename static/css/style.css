@@ -932,7 +932,7 @@ h2 {
   width: 100%;
 }
 
-.product-view .product-search input {
+.product-view .product-search button {
   width: 100%;
   height: 35px;
   padding: 0 15px;
@@ -943,7 +943,7 @@ h2 {
   transition: all .3s;
 }
 
-.product-view .product-search input:focus {
+.product-view .product-search button:focus {
   border-color: #703910;
 }
 

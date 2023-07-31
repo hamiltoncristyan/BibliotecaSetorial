@@ -75,10 +75,12 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="search">
-            <input type="text" placeholder="Pesquisar">
-            <button><i class="fa fa-search"></i></button>
-          </div>
+          <form method="POST" action="/pesquisar_livro">
+            <div class="search">
+              <input name="livro" type="text" placeholder="Pesquisar">
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

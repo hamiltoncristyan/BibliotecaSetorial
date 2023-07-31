@@ -18,16 +18,27 @@ class LivroDAO:
         except:
             return 0
 
-    def autenticar(self, nome):
+    def pesquisar_livro(self, nome):
         try:
-            sql = "SELECT * FROM Livro WHERE livro=%s"
+            if nome is not None:
 
-            cursor = self.con.cursor()
-            cursor.execute(sql, (nome))
+                cursor = self.con.cursor()
+                sql = "SELECT * FROM livro WHERE nome = %s"
+                print(nome)
+                cursor.execute(sql, (nome,))
 
-            livro = cursor.fetchone()  # lastrowid, fetchone, fetchall
-            return livro
+                livro = cursor.fetchall()  # lastrowid, fetchone, fetchall
+                return livro
+            else:
+                # pegar todas os produtos
+                sql = "SELECT * FROM Livro"
+                cursor = self.con.cursor()
+                cursor.execute(sql)
+                livros = cursor.fetchall()
+                return livros
+
         except:
+            print(nome)
             return None
 
     def listar_livro(self):

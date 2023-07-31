@@ -4,3 +4,6 @@ INSERT INTO AREA(nome) VALUES('QUÍMICA');
 SELECT * FROM AREA;
 SELECT * FROM LIVRO;
 SELECT * FROM USUARIO;
+
+SELECT * FROM Livro WHERE nome LIKE 'Informática. Conceitos Básicos';
+SELECT * FROM livro WHERE nome = 'Informática. Conceitos Básicos';
