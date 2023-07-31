@@ -45,6 +45,7 @@ def autorizacao():
     acoes = app.auth.keys()
     if acao in list(acoes):
         if session.get('logado') is None:
+            print(session.get('logado'))
             return redirect(url_for('index'))
         else:
             return redirect(url_for('painel'))

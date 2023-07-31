@@ -16,6 +16,17 @@ class EmprestimoDAO:
         except:
             return 0
 
+    def emprestimos(self, usuario_matricula):
+
+        sql = "SELECT INTO * emprestimo WHERE usuario_matricula = %s "
+        cursor = self.con.cursor()
+        cursor.execute(sql, (usuario_matricula,))
+
+        self.con.commit()
+        emprestimos = cursor.fetchone
+        return emprestimos
+
+
     #def autenticar(self, id_exemplar):
         #try:
             #sql = "SELECT * FROM Emprestimo WHERE id_exemplar=%s AND senha=%s"
