@@ -24,8 +24,7 @@ DB_NAME = "mydb"
 
 app.auth = {
     # 'ação': {perfil:permissão}
-    'painel_professor': {0: 1, 1: 0},
-    'painel_aluno': {0: 0, 1: 1},
+    'painel': {0: 1, 1: 1},
     'logout': {0: 1, 1: 1},
     'login': {0: 1, 1: 1},
     'cadastrar_livro': {0: 1, 1: 0}
@@ -48,9 +47,8 @@ def autorizacao():
         if session.get('logado') is None:
             return redirect(url_for('index'))
         else:
-            tipo = session['logado']['tipo']
-            if app.auth[acao][tipo] == 0:
-                return redirect(url_for('painel'))
+            return redirect(url_for('painel'))
+
 
 
 def get_db():
@@ -90,10 +88,10 @@ def login():
 
         if token:
             user = api.getMeusDados(token)
-            print(user)
+
 
             daoUsuario = UsuarioDAO(get_db())
-            #user_db = daoUsuario.verificar_matricula(request.form['matricula'])
+            user_db = daoUsuario.verificar_matricula(request.form['matricula'])
             user_db = None
             if user_db is None:
                 matricula = request.form['matricula']
@@ -110,48 +108,50 @@ def login():
 
                 user_db = Usuario(matricula, nome, curso, email, vinculo, link_foto, senha)
                 codigo = daoUsuario.inserir(user_db)
-                #user_db = daoUsuario.verificar_matricula(matricula)
+                user_db = daoUsuario.verificar_matricula(matricula)
                 #flash(f'Usuário cadastrado {codigo}' % codigo)
 
-            # session['logado'] = {
-            #     'matricula': user_db[0],
-            #     'nome': user_db[1],
-            #     'curso': user_db[2],
-            #     'email': user_db[3],
-            #     'vinculo': user_db[4],
-            #     'link_foto': user_db[5]
-            # }
             session['logado'] = {
-                'matricula': user_db.matricula,
-                'nome': user_db.nome,
-                'curso': user_db.curso,
-                'email': user_db.email,
-                'vinculo': user_db.vinculo,
-                'link_foto': user_db.link_foto
+                'matricula': user_db[0],
+                'nome': user_db[1],
+                'curso': user_db[2],
+                'email': user_db[3],
+                'vinculo': user_db[4],
+                'link_foto': user_db[5]
             }
-            if user_db.vinculo == 0:
-                return redirect(url_for('painel_professor'))
 
-            return redirect(url_for('painel_aluno'))
+            return redirect(url_for('painel'))
 
 
-@app.route('/painel_aluno', methods=['GET', 'POST'])
-def painel_aluno():
+@app.route('/painel', methods=['GET', 'POST'])
+def painel():
+    if session['logado']['vinculo'] == 0:
+        mostrar_div = True
+    else:
+        mostrar_div = False
+
     daoLivro = LivroDAO(get_db())
     livro_db = daoLivro.listar_livro()
-    return render_template("painel_aluno.html", livro=livro_db)
+
+    return render_template("painel.html", livro=livro_db, mostrar_div=mostrar_div)
 
 
 @app.route('/minha_conta', methods=['GET', 'POST'])
 def minha_conta():
-    token = session.get('token')
-    api = Suap()
-    user = api.getMeusDados(token)
-    url_foto_150x200 = user['url_foto_150x200']
-    tipo_vinculo = user['tipo_vinculo']
-    nome = user['vinculo']['nome']
-    matricula = user['matricula']
-    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome,  matricula=matricula, tipo_vinculo=tipo_vinculo)
+
+    matricula = session['logado']['matricula']
+    dao = UsuarioDAO(get_db())
+    user = dao.verificar_matricula(matricula)
+    if session['logado']['vinculo'] == 0:
+        mostrar_div = True
+    else:
+        mostrar_div = False
+    url_foto_150x200 = user[5]
+    tipo_vinculo = user[4]
+    nome = user[1]
+    matricula = user[0]
+
+    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome,  matricula=matricula, tipo_vinculo=tipo_vinculo, mostrar_div = mostrar_div)
 
 
 @app.route('/cadastrar_livro', methods=['GET', 'POST'])
@@ -162,14 +162,16 @@ def cadastrar_livro():
         area_id_area = request.form['area']
         quantidade_pag = request.form['quantidade_pag']
         link_capa = request.form['link_capa']
+        quant_exemp = int(request.form['quant_exemp'])
 
-        livro = Livro(nome, autor, quantidade_pag, area_id_area, link_capa)
+        for exemplar in range(quant_exemp):
+            livro = Livro(nome, autor, quantidade_pag, area_id_area, link_capa)
 
-        dao = LivroDAO(get_db())
-        codigo = dao.inserir(livro)
+            dao = LivroDAO(get_db())
+            codigo = dao.inserir(livro)
 
         if codigo > 0:
-            flash("Cadastrado com sucesso! Código %d" % codigo, "sucess")
+            flash("Cadastrado com sucesso! Código %d" % codigo, 'sucess')
         else:
             flash("Erro ao cadastrar!", "danger")
 
@@ -181,7 +183,13 @@ def cadastrar_livro():
 def livros():
     dao = LivroDAO(get_db())
     livros_db = dao.listar_livro()
-    return render_template("livros.html", livros=livros_db)
+
+    if session['logado']['vinculo'] == 0:
+        mostrar_div = True
+    else:
+        mostrar_div = False
+
+    return render_template("livros.html", livros=livros_db, mostrar_div = mostrar_div)
 
 
 @app.route('/consulta/<area_id_area>', methods=['GET', 'POST'])

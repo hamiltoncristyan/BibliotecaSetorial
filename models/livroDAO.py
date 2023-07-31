@@ -11,7 +11,9 @@ class LivroDAO:
 
             self.con.commit()
             id_livro = cursor.lastrowid
+
             return id_livro
+
 
         except:
             return 0

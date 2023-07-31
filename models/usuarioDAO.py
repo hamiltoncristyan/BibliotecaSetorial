@@ -17,6 +17,19 @@ class UsuarioDAO:
         except:
             return 0
 
+    def inf_usuario(self, matricula):
+        try:
+            sql = "SELECT * FROM Usuario WHERE matricula = %s"
+            cursor = self.con.cursor()
+            cursor.execute(sql, (matricula,))
+            user = cursor.fectchone()
+
+            return user
+
+        except:
+            return None
+
+
     def verificar_matricula(self, matricula):
         try:
             sql = "SELECT * FROM Usuario WHERE matricula = %s"
