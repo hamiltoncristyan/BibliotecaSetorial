@@ -5,8 +5,6 @@ from datetime import timedelta
 
 from models.usuario import Usuario
 from models.usuarioDAO import UsuarioDAO
-from models.exemplar import Exemplar
-from models.exemplarDAO import ExemplarDAO
 from models.livro import Livro
 from models.livroDAO import LivroDAO
 from models.emprestimo import Emprestimo
