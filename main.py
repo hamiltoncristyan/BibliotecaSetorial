@@ -144,10 +144,12 @@ def minha_conta():
     matricula = session['logado']['matricula']
     dao = UsuarioDAO(get_db())
     user = dao.verificar_matricula(matricula)
+
     if session['logado']['vinculo'] == 0:
         mostrar_div = True
     else:
         mostrar_div = False
+
     url_foto_150x200 = user[5]
     tipo_vinculo = user[4]
     nome = user[1]
