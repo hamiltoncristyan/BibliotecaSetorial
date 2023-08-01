@@ -1,7 +1,6 @@
 from flask import Flask, g, render_template, request, redirect, url_for, flash, session
 import mysql.connector
-from datetime import timedelta
-
+from datetime import date, timedelta
 
 from models.usuario import Usuario
 from models.usuarioDAO import UsuarioDAO
@@ -28,11 +27,10 @@ app.auth = {
     'cadastrar_livro': {0: 1, 1: 0}
 }
 
-
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 
-#@app.before_request
+# @app.before_request
 def autorizacao():
     acao = request.path[1:]
     acao = acao.split('/')
@@ -49,7 +47,6 @@ def autorizacao():
             return redirect(url_for('painel'))
 
 
-
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -60,6 +57,7 @@ def get_db():
             database=DB_NAME
         )
     return db
+
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -87,7 +85,6 @@ def login():
 
         if token:
             user = api.getMeusDados(token)
-
 
             daoUsuario = UsuarioDAO(get_db())
             user_db = daoUsuario.verificar_matricula(request.form['matricula'])
@@ -124,7 +121,6 @@ def login():
 
 @app.route('/painel', methods=['GET', 'POST'])
 def painel():
-
     if session['logado']['vinculo'] == 0:
         mostrar_div = True
     else:
@@ -138,7 +134,6 @@ def painel():
 
 @app.route('/minha_conta', methods=['GET', 'POST'])
 def minha_conta():
-
     matricula = session['logado']['matricula']
     dao = UsuarioDAO(get_db())
     user = dao.verificar_matricula(matricula)
@@ -153,12 +148,14 @@ def minha_conta():
     nome = user[1]
     matricula = user[0]
 
-    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome,  matricula=matricula, tipo_vinculo=tipo_vinculo, mostrar_div=mostrar_div)
+    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome, matricula=matricula,
+                           tipo_vinculo=tipo_vinculo, mostrar_div=mostrar_div)
 
 
 @app.route('/cadastrar_livro', methods=['GET', 'POST'])
 def cadastrar_livro():
     if request.method == "POST":
+
         nome = request.form['nome']
         autor = request.form['autor']
         area_id_area = request.form['area']
@@ -181,6 +178,32 @@ def cadastrar_livro():
     return render_template("cadastrar_livro.html", titulo=vartitulo)
 
 
+@app.route('/emprestimo', methods=['GET', 'POST'])
+def emprestimo():
+    if request.method == 'POST':
+        livro_id_livro = request.form['livro_id_livro']
+        livro_id_livro = int(livro_id_livro)
+        livro_area_id_area = int(request.form['livro_area_id_area'])
+        print(session['logado']['matricula'])
+        usuario_matricula = int(session['logado']['matricula'])
+        data_emprestimo = date.today()
+        print(data_emprestimo)
+        data_devolucao = date.today() + timedelta(weeks=2)
+        print(data_devolucao)
+        estado = "emprestado"
+
+        emprestimo = Emprestimo(livro_id_livro, livro_area_id_area, usuario_matricula, data_emprestimo, data_devolucao, estado)
+
+        dao = EmprestimoDAO(get_db())
+        codigo = dao.inserir(emprestimo)
+
+        if codigo > 0:
+            flash("Empréstimo Solicitado! Código %d" % codigo, 'sucess')
+        else:
+            return None
+
+
+
 @app.route('/livros', methods=['GET', 'POST'])
 def livros():
     dao = LivroDAO(get_db())
@@ -191,18 +214,15 @@ def livros():
     else:
         mostrar_div = False
 
-    return render_template("livros.html", livros=livros_db, mostrar_div = mostrar_div)
+    return render_template("livros.html", livros=livros_db, mostrar_div=mostrar_div)
 
 
 @app.route('/pesquisar_livro', methods=['GET', 'POST'])
 def pesquisar_livro():
     if request.method == "POST":
-        print(request.form['livro'])
         livro = request.form['livro']
-        print(livro)
         dao = LivroDAO(get_db)
         livros_db = dao.pesquisar_livro(livro)
-        print(livros_db)
         return render_template('livros.html', livros=livros_db)
 
 

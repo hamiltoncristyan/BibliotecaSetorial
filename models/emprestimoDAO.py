@@ -5,13 +5,13 @@ class EmprestimoDAO:
     def inserir(self, emprestimo):
 
         try:
-            sql = "INSERT INTO emprestimo (id_exemplar, usuario_matricula, emprestimo_id, data_emprestimo, data_devolucao) VALUES (%s, %s, %s, %s, %s)"
+            sql = "INSERT INTO emprestimo (livro_id_livro, livro_area_id_area, usuario_matricula, data_emprestimo, data_devolucao, estado) VALUES (%s, %s, %s, %s, %s, %s)"
             cursor = self.con.cursor()
-            cursor.execute(sql, (emprestimo.id_exemplar, emprestimo.usuario_matricula, emprestimo.emprestimo_id, emprestimo.data_devolucao, emprestimo.data_devolucao))
+            cursor.execute(sql, (emprestimo.livro_id_livro, emprestimo.livro_area_id_area, emprestimo.usuario_matricula, emprestimo.data_emprestimo, emprestimo.data_devolucao, emprestimo.estado))
 
             self.con.commit()
-            id_exemplar = cursor.lastrowid
-            return id_exemplar
+            emprestimo = cursor.lastrowid
+            return emprestimo
 
         except:
             return 0

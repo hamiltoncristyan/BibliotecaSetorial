@@ -157,7 +157,13 @@
                       <td>{{ l[1] }}</td>
                       <td>{{ l[2] }}</td>
                       <td>{{ l[3] }}</td>
-                       <td><button class="btn">Solicitar</button></td>
+                      <td>
+                        <form action="/emprestimo" method="post">
+                          <input type="hidden" name="livro_id_livro" value="{{ l[0] }}">
+                          <input type="hidden" name="livro_area_id_area" value="{{ l[4] }}">
+                          <button class="btn" type="submit">Solicitar</button>
+                        </form>
+                      </td>
                     </tr>
                    {% endfor %}
                 {% else %}
