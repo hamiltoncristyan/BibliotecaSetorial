@@ -41,7 +41,6 @@ def autorizacao():
     acoes = app.auth.keys()
     if acao in list(acoes):
         if session.get('logado') is None:
-            print(session.get('logado'))
             return redirect(url_for('index'))
         else:
             return redirect(url_for('painel'))
@@ -146,10 +145,24 @@ def minha_conta():
     url_foto_150x200 = user[5]
     tipo_vinculo = user[4]
     nome = user[1]
-    matricula = user[0]
+
+    dao = EmprestimoDAO(get_db())
+    emprestimos = dao.emprestimos(matricula)
+
+
+    if request.method == "POST":
+
+        estado = request.form['estado']
+        livro_id_livro = request.form['livro_id_livro']
+        dao = EmprestimoDAO(get_db())
+        update = dao.atualizar(estado, livro_id_livro)
+        if update is not None:
+            flash("Emprestimo aceito com sucesso! Código ", 'sucess')
+        else:
+            return None
 
     return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome, matricula=matricula,
-                           tipo_vinculo=tipo_vinculo, mostrar_div=mostrar_div)
+                           tipo_vinculo=tipo_vinculo, mostrar_div=mostrar_div, emprestimos=emprestimos)
 
 
 @app.route('/cadastrar_livro', methods=['GET', 'POST'])
@@ -184,13 +197,11 @@ def emprestimo():
         livro_id_livro = request.form['livro_id_livro']
         livro_id_livro = int(livro_id_livro)
         livro_area_id_area = int(request.form['livro_area_id_area'])
-        print(session['logado']['matricula'])
         usuario_matricula = int(session['logado']['matricula'])
         data_emprestimo = date.today()
-        print(data_emprestimo)
         data_devolucao = date.today() + timedelta(weeks=2)
-        print(data_devolucao)
-        estado = "emprestado"
+
+        estado = "solicitado"
 
         emprestimo = Emprestimo(livro_id_livro, livro_area_id_area, usuario_matricula, data_emprestimo, data_devolucao, estado)
 
@@ -202,6 +213,21 @@ def emprestimo():
         else:
             return None
 
+
+@app.route('/atualizar_emprestimo', methods=['GET', 'POST'])
+def atualizar_emprestimo():
+    if request.method == 'POST':
+        livro_id_livro = request.form['livro_id_livro']
+        livro_id_livro = int(livro_id_livro)
+        estado = request.form['estado']
+        dao = EmprestimoDAO(get_db())
+        codigo = dao.atualizar(livro_id_livro, estado)
+
+        if codigo is not None:
+            flash("Empréstimo Aceito! Código %d" % codigo, 'sucess')
+            return redirect(url_for('painel'))
+        else:
+            return None
 
 
 @app.route('/livros', methods=['GET', 'POST'])

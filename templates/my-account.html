@@ -116,19 +116,38 @@
                   <thead class="thead-dark">
                     <tr>
                       <th>ID</th>
-                      <th>Livro</th>
-                      <th>Quantidade de Páginas</th>
+                      <th>ID da área do Livro</th>
                       <th>Usuário Matrícula</th>
+                      <th>Data Empréstimo</th>
+                      <th>Data Devolução</th>
                       <th>Status</th>
+                      <th>Opção</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>009</td>
-                      <td>Android CokBook</td>
-                      <td>672 páginas</td>
-                      <td>20201084010009</td>
-                      <td><button class="btn">Devolver</button></td>
+                  {% if emprestimos %}
+                    {% for e in emprestimos %}
+                      <tr>
+                        <td>{{ e[0] }}</td>
+                        <td>{{ e[1] }}</td>
+                        <td>{{ e[2] }}</td>
+                        <td>{{ e[3] }}</td>
+                        <td>{{ e[4] }}</td>
+                        <td>{{ e[5] }}</td>
+                        <form action="/atualizar_emprestimo" method="POST">
+                          <input type="hidden" name="livro_id_livro" value="{{ e[0] }}">
+                          <input type="hidden" name="livro_id_area_area" value="{{ e[1] }}">
+                          <input type="hidden" name="usuario_matricula" value="{{ e[2] }}">
+                          <input type="hidden" name="data_emprestimo" value="{{ e[3] }}">
+                          <input type="hidden" name="data_devolucao" value="{{ e[4] }}">
+                          <input type="hidden" name="estado" value="aceito">
+                          <td><button class="btn" type="submit" >Aceitar</button></td>
+                        </form>
+                      </tr>
+                    {% endfor %}
+                  {% else %}
+                    <p>Nenhum item foi encontrado</p>
+                  {% endif %}
                     </tr>
                   </tbody>
                 </table>
