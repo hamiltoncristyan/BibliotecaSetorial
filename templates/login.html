@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Icon -->
-  <link href="static/logo/pen.png" rel="icon" type="image/png">
+  <link href="static/logo/pen.png" rel="icon" type="image/png" >
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
@@ -43,15 +43,6 @@
 
   <!-- Login Start -->
   <div class="col-lg-6">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
     <div class="login-form">
       <form method="POST" action="/login">
         <div class="col-md-6">

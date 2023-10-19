@@ -40,9 +40,7 @@
             <a href="/painel" class="nav-item nav-link active">Início</a>
             <a href="/login" class="nav-item nav-link">Login</a>
             <a href="/livros" class="nav-item nav-link">Livros</a>
-            {% if mostrar_div == True %}
-              <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livro</a>
-            {% endif %}
+            <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livros</a>
             <a href="templates/my-account.html" class="nav-item nav-link">Minha conta</a>
             <div class="nav-item dropdown">
             </div>
@@ -157,15 +155,9 @@
                       <td>{{ l[1] }}</td>
                       <td>{{ l[2] }}</td>
                       <td>{{ l[3] }}</td>
-                      <td>
-                        <form action="/emprestimo" method="post">
-                          <input type="hidden" name="livro_id_livro" value="{{ l[0] }}">
-                          <input type="hidden" name="livro_area_id_area" value="{{ l[4] }}">
-                          <button class="btn" type="submit">Solicitar</button>
-                        </form>
-                      </td>
+                       <td><button class="btn">Solicitar</button></td>
                     </tr>
-                  {% endfor %}
+                   {% endfor %}
                 {% else %}
                   <p>Nenhum item foi encontrado</p>
                 {% endif %}

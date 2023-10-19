@@ -11,34 +11,21 @@ class LivroDAO:
 
             self.con.commit()
             id_livro = cursor.lastrowid
-
             return id_livro
-
 
         except:
             return 0
 
-    def pesquisar_livro(self, nome):
+    def autenticar(self, nome):
         try:
-            if nome is not None:
+            sql = "SELECT * FROM Livro WHERE livro=%s"
 
-                cursor = self.con.cursor()
-                sql = "SELECT * FROM livro WHERE nome = %s"
-                print(nome)
-                cursor.execute(sql, (nome,))
+            cursor = self.con.cursor()
+            cursor.execute(sql, (nome))
 
-                livro = cursor.fetchall()  # lastrowid, fetchone, fetchall
-                return livro
-            else:
-                # pegar todas os produtos
-                sql = "SELECT * FROM Livro"
-                cursor = self.con.cursor()
-                cursor.execute(sql)
-                livros = cursor.fetchall()
-                return livros
-
+            livro = cursor.fetchone()  # lastrowid, fetchone, fetchall
+            return livro
         except:
-            print(nome)
             return None
 
     def listar_livro(self):

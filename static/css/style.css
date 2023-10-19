@@ -932,7 +932,7 @@ h2 {
   width: 100%;
 }
 
-.product-view .product-search button {
+.product-view .product-search input {
   width: 100%;
   height: 35px;
   padding: 0 15px;
@@ -943,7 +943,7 @@ h2 {
   transition: all .3s;
 }
 
-.product-view .product-search button:focus {
+.product-view .product-search input:focus {
   border-color: #703910;
 }
 
@@ -2212,7 +2212,6 @@ h2 {
   padding: 30px;
   background: #ffffff;
   margin-bottom: 30px;
-  align-items: center;
 }
 
 
@@ -2408,11 +2407,12 @@ h2 {
 /********* My Account CSS *********/
 /**********************************/
 
-.foto-perfil {
-  margin: 20px;
+.foto-perfil{
+    margin: 20px;
 }
 
-.informações {
-  display: block;
-  decoration: ;
+.informações{
+    display: block;
+    decoration: ;
 }
+

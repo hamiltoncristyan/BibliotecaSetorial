@@ -12,34 +12,22 @@ class UsuarioDAO:
             usuario.senha))
 
             self.con.commit()
-            return 1
+            matricula = cursor.lastrowid
+            return matricula
 
         except:
             return 0
-
-    def inf_usuario(self, matricula):
-        try:
-            sql = "SELECT * FROM Usuario WHERE matricula = %s"
-            cursor = self.con.cursor()
-            cursor.execute(sql, (matricula,))
-            user = cursor.fectchone()
-
-            return user
-
-        except:
-            return None
-
 
     def verificar_matricula(self, matricula):
         try:
             sql = "SELECT * FROM Usuario WHERE matricula = %s"
 
             cursor = self.con.cursor()
-            cursor.execute(sql, (matricula,))
+            cursor.execute(sql, (matricula))
 
-            user_data = cursor.fetchone()
+            user_data = cursor.fetchone
 
-            return user_data
+            return user_data is not None
 
         except:
             return None

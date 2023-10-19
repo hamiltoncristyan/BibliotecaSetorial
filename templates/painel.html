@@ -40,20 +40,13 @@
             <a href="/painel" class="nav-item nav-link active">Início</a>
             <a href="/login" class="nav-item nav-link">Login</a>
             <a href="/livros" class="nav-item nav-link">Livros</a>
-            {% if mostrar_div == True %}
-              <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livro</a>
-            {% endif %}
+            <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livros</a>
             <a href="/minha_conta" class="nav-item nav-link">Minha conta</a>
             <div class="nav-item dropdown">
             </div>
           </div>
           <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">emprestimos</a>
-                <div class="dropdown-menu">
-                  <a href="#" class="dropdown-item">emprestimo 1</a>
-                  <a href="#" class="dropdown-item">emprestimo 1</a>
-                </div>
             </div>
           </div>
         </div>
@@ -75,12 +68,10 @@
           </div>
         </div>
         <div class="col-md-4">
-          <form method="POST" action="/pesquisar_livro">
-            <div class="search">
-              <input name="livro" type="text" placeholder="Pesquisar">
-              <button type="submit"><i class="fa fa-search"></i></button>
-            </div>
-          </form>
+          <div class="search">
+            <input type="text" placeholder="Pesquisar">
+            <button><i class="fa fa-search"></i></button>
+          </div>
         </div>
       </div>
     </div>

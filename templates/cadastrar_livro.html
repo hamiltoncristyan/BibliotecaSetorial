@@ -40,7 +40,7 @@
             <a href="/login" class="nav-item nav-link">Login</a>
             <a href="/livros" class="nav-item nav-link">Livros</a>
             <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livros</a>
-            <a href="/minha_conta" class="nav-item nav-link">Minha conta</a>
+            <a href="templates/my-account.html" class="nav-item nav-link">Minha conta</a>
             <div class="nav-item dropdown">
             </div>
           </div>
@@ -73,15 +73,6 @@
 
   <!-- Login Start -->
   <div class="col-lg-6">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
     <div class="login-form">
       <form method="POST" action="/cadastrar_livro">
         <div class="col-md-6">
@@ -107,10 +98,6 @@
         <div class="col-md-6">
           <label for="link_capa">Link da Imagem da Capa do Livro</label>
           <input class="form-control" type="text" placeholder="Link da imagem da capa" name="link_capa" required>
-        </div>
-        <div class="col-md-6">
-          <label for="quant_exemp">Quantidade de exemplares</label>
-          <input class="form-control" type="number" placeholder="Quantidade de exemplares disponíveis" name="quant_exemp" required>
         </div>
         <div class="col-md-12">
           <input class="btn" type="submit" value="Enviar" />

@@ -39,9 +39,6 @@
             <a href="/painel" class="nav-item nav-link">Início</a>
             <a href="/login" class="nav-item nav-link">Login</a>
             <a href="/livros" class="nav-item nav-link">Livros</a>
-            {% if mostrar_div == True %}
-              <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livro</a>
-            {% endif %}
             <a href="/minha_conta" class="nav-item nav-link active">Minha Conta</a>
           </div>
         </div>
@@ -104,7 +101,7 @@
             <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
               <h4>Dashboard</h4>
               <div class="col-md-6">
-                <img src="{{ url_foto_150x200 }}" class="foto-perfil">
+                <img src="https://suap.ifrn.edu.br{{ url_foto_150x200 }}" class="foto-perfil">
                 <p class="informações"> {{ matricula }}</p>
                 <p class="informações"> {{ nome }}</p>
                 <p class="informações"> {{ tipo_vinculo }}</p>
@@ -116,38 +113,19 @@
                   <thead class="thead-dark">
                     <tr>
                       <th>ID</th>
-                      <th>ID da área do Livro</th>
+                      <th>Livro</th>
+                      <th>Quantidade de Páginas</th>
                       <th>Usuário Matrícula</th>
-                      <th>Data Empréstimo</th>
-                      <th>Data Devolução</th>
                       <th>Status</th>
-                      <th>Opção</th>
                     </tr>
                   </thead>
                   <tbody>
-                  {% if emprestimos %}
-                    {% for e in emprestimos %}
-                      <tr>
-                        <td>{{ e[0] }}</td>
-                        <td>{{ e[1] }}</td>
-                        <td>{{ e[2] }}</td>
-                        <td>{{ e[3] }}</td>
-                        <td>{{ e[4] }}</td>
-                        <td>{{ e[5] }}</td>
-                        <form action="/atualizar_emprestimo" method="POST">
-                          <input type="hidden" name="livro_id_livro" value="{{ e[0] }}">
-                          <input type="hidden" name="livro_id_area_area" value="{{ e[1] }}">
-                          <input type="hidden" name="usuario_matricula" value="{{ e[2] }}">
-                          <input type="hidden" name="data_emprestimo" value="{{ e[3] }}">
-                          <input type="hidden" name="data_devolucao" value="{{ e[4] }}">
-                          <input type="hidden" name="estado" value="aceito">
-                          <td><button class="btn" type="submit" >Aceitar</button></td>
-                        </form>
-                      </tr>
-                    {% endfor %}
-                  {% else %}
-                    <p>Nenhum item foi encontrado</p>
-                  {% endif %}
+                    <tr>
+                      <td>009</td>
+                      <td>Android CokBook</td>
+                      <td>672 páginas</td>
+                      <td>20201084010009</td>
+                      <td><button class="btn">Devolver</button></td>
                     </tr>
                   </tbody>
                 </table>
