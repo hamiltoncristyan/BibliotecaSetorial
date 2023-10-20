@@ -70,3 +70,13 @@ class LivroDAO:
         except:
             return None
 
+    def excluir(self, id_livro):
+        try:
+            sql = "DELETE FROM Livro WHERE id_livro = %s"
+            cursor = self.con.cursor()
+            cursor.execute(sql, (id_livro,))
+            self.con.commit()
+            return cursor.rowcount
+        except:
+            return 0
+

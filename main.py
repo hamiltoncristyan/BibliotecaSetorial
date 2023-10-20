@@ -173,6 +173,12 @@ def cadastrar_livro():
 @app.route('/livros', methods=['GET', 'POST'])
 def livros():
     dao = LivroDAO(get_db())
+
+    if request.method == 'POST':
+        id_livro = request.form['id_livro']
+        dao.excluir(id_livro)
+        return redirect('/livros')
+
     livros_db = dao.listar_livro()
     return render_template("livros.html", livros=livros_db)
 

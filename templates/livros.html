@@ -156,6 +156,12 @@
                       <td>{{ l[2] }}</td>
                       <td>{{ l[3] }}</td>
                        <td><button class="btn">Solicitar</button></td>
+                      <td>
+                        <form method="post">
+                          <input type="hidden" name="id_livro" value="{{ l[0] }}">
+                          <button type="submit"> Excluir </button>
+                        </form>
+                      </td>
                     </tr>
                    {% endfor %}
                 {% else %}
