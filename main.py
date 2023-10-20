@@ -183,13 +183,11 @@ def livros():
     return render_template("livros.html", livros=livros_db)
 
 
-@app.route('/consulta/<area_id_area>', methods=['GET', 'POST'])
+@app.route('/consulta/<int:area_id_area>', methods=['GET'])
 def consulta(area_id_area):
-    if request.method == "GET":
-        area_id_area = request.args.get(area_id_area)
-        dao = LivroDAO(get_db)
-        livros_db = dao.listar_livro_area(area_id_area)
-        return render_template('livros.html', livros=livros_db)
+    dao = LivroDAO(get_db())
+    livros_db = dao.listar_livro_area(int(area_id_area))
+    return render_template('livros.html', livros=livros_db)
 
 
 @app.route('/logout')
@@ -200,4 +198,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(host='10.177.1.136', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)

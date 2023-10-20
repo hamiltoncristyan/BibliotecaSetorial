@@ -107,14 +107,14 @@
                     <div class="product-short">
                       <div class="dropdown">
                         <div class="dropdown-toggle" data-toggle="dropdown">Curso</div>
-                          <form action="/consulta/<area_id_area>" method="GET">
+                          <form action="/consulta/{{ area_id_area }}" method="GET">
                             <select class="dropdown-menu dropdown-menu-right" name="area_id_area">
                               <option value="2" class="dropdown-item">Agropecuária</option>
                               <option value="1" class="dropdown-item">Informática</option>
                               <option value="3" class="dropdown-item">Química</option>
                             </select>
                             <div class="col-md-12">
-                              <input class="btn" type="submit" value="Filtrar"/>
+                              <input class="btn" type="submit" value="Filtrar" />
                             </div>
                         </form>
                       </div>
