@@ -28,7 +28,6 @@ app.auth = {
     'painel_aluno': {0: 0, 1: 1},
     'logout': {0: 1, 1: 1},
     'login': {0: 1, 1: 1},
-    #'cadastrar_livro': {0: 1, 1: 0}
 }
 
 
@@ -198,8 +197,6 @@ def logout():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     app.run(host='0.0.0.0', port=80, debug=True)
-=======
-    app.run(host='10.177.1.21', port=80, debug=True)
->>>>>>> 158c41447dd8528be589a6d3da6931256b69d7cb
+
+
