@@ -102,9 +102,13 @@
               <h4>Dashboard</h4>
               <div class="col-md-6">
                 <img src="https://suap.ifrn.edu.br{{ url_foto_150x200 }}" class="foto-perfil">
-                <p class="informações"> {{ matricula }}</p>
-                <p class="informações"> {{ nome }}</p>
-                <p class="informações"> {{ tipo_vinculo }}</p>
+                <div class="row">
+                    <div class="col-md-6">
+                      <p><strong>Nome:</strong> {{ url_foto_150x200 }}</p>
+                      <p><strong>Número de Matrícula:</strong> {{ url_foto_150x200 }}</p>
+                      <p><strong>Email:</strong> {{ url_foto_150x200 }}</p>
+                    </div>
+                </div>
               </div>
             </div>
             <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
