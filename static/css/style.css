@@ -2212,6 +2212,7 @@ h2 {
   padding: 30px;
   background: #ffffff;
   margin-bottom: 30px;
+  align-items: center;
 }
 
 
@@ -2407,12 +2408,11 @@ h2 {
 /********* My Account CSS *********/
 /**********************************/
 
-.foto-perfil{
-    margin: 20px;
+.foto-perfil {
+  margin: 20px;
 }
 
-.informações{
-    display: block;
-    decoration: ;
+.informações {
+  display: block;
+  decoration: ;
 }
-

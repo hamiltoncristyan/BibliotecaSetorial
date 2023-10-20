@@ -89,26 +89,30 @@ def login():
         token = api.autentica(matricula, senha)
         session['token'] = token
         user = api.getMeusDados(token)
-        user[matricula] = matricula
+        user['vinculo']['matricula'] = matricula
         print(user)
 
         daoUsuario = UsuarioDAO(get_db())
         usuario = daoUsuario.verificar_matricula(request.form['matricula'])
 
+        if user['tipo_vinculo'] == "Professor":
+            return redirect(url_for('painel_professor'))
+            vinculo = 0
+
+        else:
+            return redirect(url_for('painel_aluno'))
+            vinculo = 1
+
         if usuario is not None:
 
             session['vinculo']['matricula'] = matricula
             session['token'] = token
-            return render_template('painel')
+
         else:
 
-            if user['tipo_vinculo'] == "Professor":
-                vinculo = 0
-
-            else:
-                vinculo = 1
-
-            nome = user['nome_usual']
+            matricula = request.form['matricula']
+            matricula = int(matricula)
+            nome = user['vinculo']['nome']
             curso = user['vinculo']['curso']
             email = user['email']
             link_foto = "https://suap.ifrn.edu.br" + user['url_foto_150x200']
@@ -119,20 +123,13 @@ def login():
             dao = UsuarioDAO(get_db())
             codigo = dao.inserir(usuario)
 
-            if vinculo == 0:
-                return render_template('painel_professor')
-
-            else:
-                return render_template('painel.html')
-
-    return render_template('login.html')
 
 
 @app.route('/painel_aluno', methods=['GET', 'POST'])
 def painel_aluno():
     daoLivro = LivroDAO(get_db())
     livro_db = daoLivro.listar_livro()
-    return render_template("painel.html", livro=livro_db)
+    return render_template("painel_aluno.html", livro=livro_db)
 
 
 @app.route('/minha_conta', methods=['GET', 'POST'])
@@ -201,4 +198,8 @@ def logout():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(host='0.0.0.0', port=80, debug=True)
+=======
+    app.run(host='10.177.1.21', port=80, debug=True)
+>>>>>>> 158c41447dd8528be589a6d3da6931256b69d7cb
