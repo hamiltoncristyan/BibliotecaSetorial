@@ -64,6 +64,7 @@ def get_db():
         )
     return db
 
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
@@ -96,7 +97,7 @@ def login():
 
         if usuario is not None:
 
-            session['matricula'] = matricula
+            session['vinculo']['matricula'] = matricula
             session['token'] = token
             return render_template('painel')
         else:
@@ -171,7 +172,14 @@ def cadastrar_livro():
 
 @app.route('/livros', methods=['GET', 'POST'])
 def livros():
+
     dao = LivroDAO(get_db())
+
+    if request.method == "POST":
+        id_livro = request.form['id_livro']
+        dao.excluir(id_livro)
+        return redirect('/livros')
+
     livros_db = dao.listar_livro()
     return render_template("livros.html", livros=livros_db)
 
@@ -193,4 +201,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.106', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)

@@ -62,7 +62,7 @@
       <div class="row align-items-center">
         <div class="col-md-3">
           <div class="logo">
-            <a href="/painel">
+            <a href="/login">
               <img src="static/logo/logo.png" alt="Logo">
             </a>
           </div>
@@ -82,8 +82,8 @@
   <div class="breadcrumb-wrap">
     <div class="container-fluid">
       <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Livros</li>
+        <li class="breadcrumb-item"><a href="/login">Home</a></li>
+        <li class="breadcrumb-item active"><a href="/livros">Livros</li>
       </ul>
     </div>
   </div>
@@ -156,6 +156,12 @@
                       <td>{{ l[2] }}</td>
                       <td>{{ l[3] }}</td>
                        <td><button class="btn">Solicitar</button></td>
+                       <td>
+                         <form method="post">
+                           <input type="hidden" name="id_livro" value="{{ l[0] }}">
+                           <button type="submit">Excluir</button>
+                         </form>
+                       </td>
                     </tr>
                    {% endfor %}
                 {% else %}
