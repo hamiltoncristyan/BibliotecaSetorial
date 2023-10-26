@@ -43,13 +43,12 @@ class LivroDAO:
         try:
             cursor = self.con.cursor()
             if area_id_area is not None:
-                sql= "SELECT * FROM Livro WHERE area_id_area=%s"
-                cursor.execute(sql, (area_id_area))
+                sql = "SELECT * FROM Livro WHERE area_id_area = %s"
+                cursor.execute(sql, (area_id_area,))
                 livro_area = cursor.fetchall()
                 return livro_area
         except:
             return None
-
 
     def listar_livro_nome(self, nome=None):
         try:
@@ -70,3 +69,12 @@ class LivroDAO:
         except:
             return None
 
+    def excluir(self, id_livro):
+        try:
+            sql = "DELETE FROM Livro WHERE id_livro = %s"
+            cursor = self.con.cursor()
+            cursor.execute(sql, (id_livro,))
+            self.con.commit()
+            return cursor.rowcount
+        except:
+            return 0

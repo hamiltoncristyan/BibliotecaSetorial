@@ -173,17 +173,21 @@ def cadastrar_livro():
 @app.route('/livros', methods=['GET', 'POST'])
 def livros():
     dao = LivroDAO(get_db())
+
+    if request.method == 'POST':
+        id_livro = request.form['id_livro']
+        dao.excluir(id_livro)
+        return redirect('/livros')
+
     livros_db = dao.listar_livro()
     return render_template("livros.html", livros=livros_db)
 
 
-@app.route('/consulta/<area_id_area>', methods=['GET', 'POST'])
+@app.route('/consulta/<int:area_id_area>', methods=['GET'])
 def consulta(area_id_area):
-    if request.method == "GET":
-        area_id_area = request.args.get(area_id_area)
-        dao = LivroDAO(get_db)
-        livros_db = dao.listar_livro_area(area_id_area)
-        return render_template('livros.html', livros=livros_db)
+    dao = LivroDAO(get_db())
+    livros_db = dao.listar_livro_area(int(area_id_area))
+    return render_template('livros.html', livros=livros_db)
 
 
 @app.route('/logout')
