@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <title>Livros | BibliotecaSetorial</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <!-- Icon -->
+  <link href="static/logo/pen.png" rel="icon" type="image/png" >
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS Libraries -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="static/lib/slick/slick.css" rel="stylesheet">
+  <link href="static/lib/slick/slick-theme.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Nav Bar Start -->
+  <div class="nav">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a href="#" class="navbar-brand">MENU</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+          <div class="navbar-nav mr-auto">
+            <a href="/painel" class="nav-item nav-link active">Início</a>
+            <a href="/login" class="nav-item nav-link">Login</a>
+            <a href="/livros" class="nav-item nav-link">Livros</a>
+            <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livros</a>
+            <a href="templates/my-account.html" class="nav-item nav-link">Minha conta</a>
+            <div class="nav-item dropdown">
+            </div>
+          </div>
+          <div class="navbar-nav ml-auto">
+            <div class="nav-item dropdown">
+            </div>
+          </div>
+        </div>
+    </div>
+    </nav>
+  </div>
+  </div>
+  <!-- Nav Bar End -->
+
+  <!-- Bottom Bar Start -->
+  <div class="bottom-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <div class="logo">
+            <a href="/painel">
+              <img src="static/logo/logo.png" alt="Logo">
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="search">
+            <input type="text" placeholder="Pesquisar">
+            <button><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bottom Bar End -->
+
+  <!-- Breadcrumb Start -->
+  <div class="breadcrumb-wrap">
+    <div class="container-fluid">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Livros</li>
+      </ul>
+    </div>
+  </div>
+  <!-- Breadcrumb End -->
+
+  <div class="product-view">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="product-view-top">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="product-search">
+                      <input type="email" value="Pesquisa">
+                      <button><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="product-short">
+                      <div class="dropdown">
+                        <div class="dropdown-toggle" data-toggle="dropdown">Curso</div>
+                          <form action="/consulta/{{ area_id_area }}" method="GET">
+                            <select class="dropdown-menu dropdown-menu-right" name="area_id_area">
+                              <option value="2" class="dropdown-item">Agropecuária</option>
+                              <option value="1" class="dropdown-item">Informática</option>
+                              <option value="3" class="dropdown-item">Química</option>
+                            </select>
+                            <div class="col-md-12">
+                              <input class="btn" type="submit" value="Filtrar" />
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+  <!-- Cart Start -->
+  <div class="cart-page">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-16">
+          <div class="cart-page-inner">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Capa</th>
+                    <th>ID do Livro</th>
+                    <th>Nome</th>
+                    <th>Autor</th>
+                    <th>Quant. de Páginas</th>
+                    <th>Empréstimo</th>
+                  </tr>
+                </thead>
+                <tbody class="align-middle">
+                {% if livros %}
+                  {% for l in livros %}
+                    <tr>
+                      <td>
+                        <div>
+                          <img src="{{ l[5] }}" alt="Capa do Livro {{ l[1] }}" style="width: 160px; height: 230px;">
+                        </div>
+                      </td>
+                      <td>{{ l[0] }}</td>
+                      <td>{{ l[1] }}</td>
+                      <td>{{ l[2] }}</td>
+                      <td>{{ l[3] }}</td>
+                       <td><button class="btn">Solicitar</button></td>
+                      <td>
+                        <form method="post">
+                          <input type="hidden" name="id_livro" value="{{ l[0] }}">
+                          <button type="submit"> Excluir </button>
+                        </form>
+                      </td>
+                    </tr>
+                   {% endfor %}
+                {% else %}
+                  <p>Nenhum item foi encontrado</p>
+                {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Cart End -->
+
+  <!-- Back to Top -->
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="static/lib/easing/easing.min.js"></script>
+  <script src="static/lib/slick/slick.min.js"></script>
+
+  <!-- Template Javascript -->
+  <script src="static/js/main.js"></script>
+</body>
+
+</html>
