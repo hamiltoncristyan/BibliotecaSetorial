@@ -22,7 +22,7 @@ app.secret_key = "secret"
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_PASS = ""
-DB_NAME = "bibliotecasetorial"
+DB_NAME = "mydb"
 
 app.auth = {
     # 'ação': {perfil:permissão}
@@ -207,6 +207,19 @@ def livros():
     livros_db = dao.listar_livro()
     return render_template("livros.html", livros=livros_db)
 
+
+
+@app.route('/pdf', methods=['GET', 'POST'])
+def pdf():
+    dao = PdfDAO(get_db())
+
+    if request.method == 'POST':
+        id_pdf = request.form['id_pdf']
+        dao.excluir(id_pdf)
+        return redirect('/pdf')
+
+    pdf_db = dao.listar_Pdf()
+    return render_template("pdf.html", pdf=pdf_db)
 
 @app.route('/livro_detalhes/<int:livro_id>', methods=['GET'])
 def livro_detalhes(livro_id):
