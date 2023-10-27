@@ -208,6 +208,15 @@ def livros():
     return render_template("livros.html", livros=livros_db)
 
 
+@app.route('/livro_detalhes/<int:livro_id>', methods=['GET'])
+def livro_detalhes(livro_id):
+
+    dao = LivroDAO(get_db())
+    livro = dao.listar_livro_id(int(livro_id))
+
+    return render_template("livro_detalhes.html", livro=livro)
+
+
 @app.route('/Pdf', methods=['GET', 'POST'])
 def Pdf():
     dao = PdfDAO(get_db())

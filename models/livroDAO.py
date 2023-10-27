@@ -69,6 +69,25 @@ class LivroDAO:
         except:
             return None
 
+    def listar_livro_id(self, id_livro=None):
+        try:
+            cursor = self.con.cursor()
+            if id_livro is not None:
+                # pegar somente um produto
+                sql = "SELECT * FROM Livro WHERE id_livro=%s"
+                cursor.execute(sql, (int(id_livro),))
+                livro = cursor.fetchone()
+                return livro
+            else:
+                # pegar todas os produtos
+                sql = "SELECT * FROM Livro"
+                cursor.execute(sql)
+                livros = cursor.fetchall()
+                return livros
+
+        except:
+            return None
+
     def excluir(self, id_livro):
         try:
             sql = "DELETE FROM Livro WHERE id_livro = %s"
