@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`area` (
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_area`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -44,28 +45,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`pdf`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`pdf` (
-  `id_pdf` INT(11) NOT NULL,
-  `nome` VARCHAR(45) NOT NULL,
-  `area` VARCHAR(45) NOT NULL,
-  `autor` VARCHAR(45) NOT NULL,
-  `quantidade_pag` INT(11) NOT NULL,
-  `pdfcol` BLOB NOT NULL,
-  `area_id_area` INT(11) NOT NULL,
-  PRIMARY KEY (`id_pdf`, `area_id_area`),
-  INDEX `fk_pdf_area1_idx` (`area_id_area` ASC) ,
-  CONSTRAINT `fk_pdf_area1`
-    FOREIGN KEY (`area_id_area`)
-    REFERENCES `mydb`.`area` (`id_area`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -93,11 +74,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`emprestimo` (
   `data_emprestimo` DATE NOT NULL,
   `data_devolucao` DATE NOT NULL,
   `estado` VARCHAR(20) NOT NULL,
-  `pdf_id_pdf` INT(11) NOT NULL,
-  PRIMARY KEY (`livro_id_livro`, `livro_area_id_area`, `usuario_matricula`, `pdf_id_pdf`),
+  PRIMARY KEY (`livro_id_livro`, `livro_area_id_area`, `usuario_matricula`),
   INDEX `fk_livro_has_usuario_usuario1_idx` (`usuario_matricula` ASC) ,
   INDEX `fk_livro_has_usuario_livro1_idx` (`livro_id_livro` ASC, `livro_area_id_area` ASC) ,
-  INDEX `fk_emprestimo_pdf1_idx` (`pdf_id_pdf` ASC) ,
   CONSTRAINT `fk_livro_has_usuario_livro1`
     FOREIGN KEY (`livro_id_livro` , `livro_area_id_area`)
     REFERENCES `mydb`.`livro` (`id_livro` , `area_id_area`)
@@ -107,14 +86,60 @@ CREATE TABLE IF NOT EXISTS `mydb`.`emprestimo` (
     FOREIGN KEY (`usuario_matricula`)
     REFERENCES `mydb`.`usuario` (`matricula`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_emprestimo_pdf1`
-    FOREIGN KEY (`pdf_id_pdf`)
-    REFERENCES `mydb`.`pdf` (`id_pdf`)
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`pdf`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`pdf` (
+  `id_pdf` INT(11) NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `area` VARCHAR(45) NOT NULL,
+  `autor` VARCHAR(45) NOT NULL,
+  `quantidade_pag` INT(11) NOT NULL,
+  `pdfcol` LONGBLOB NOT NULL,
+  `area_id_area` INT(11) NOT NULL,
+  PRIMARY KEY (`id_pdf`, `area_id_area`),
+  INDEX `fk_pdf_area1_idx` (`area_id_area` ASC) ,
+  CONSTRAINT `fk_pdf_area1`
+    FOREIGN KEY (`area_id_area`)
+    REFERENCES `mydb`.`area` (`id_area`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`avaliacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`avaliacao` (
+  `id_avaliacao` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `data` DATE NOT NULL,
+  `avaliacao` VARCHAR(500) NOT NULL,
+  `estrelas` INT NOT NULL,
+  `pdf_id_pdf` INT(11) NULL,
+  `pdf_area_id_area` INT(11) NOT NULL,
+  `livro_id_livro` INT(11) NULL,
+  `livro_area_id_area` INT(11) NOT NULL,
+  PRIMARY KEY (`id_avaliacao`, `pdf_id_pdf`, `pdf_area_id_area`),
+  INDEX `fk_avaliacao_pdf1_idx` (`pdf_id_pdf` ASC, `pdf_area_id_area` ASC) ,
+  INDEX `fk_avaliacao_livro1_idx` (`livro_id_livro` ASC, `livro_area_id_area` ASC) ,
+  CONSTRAINT `fk_avaliacao_pdf1`
+    FOREIGN KEY (`pdf_id_pdf` , `pdf_area_id_area`)
+    REFERENCES `mydb`.`pdf` (`id_pdf` , `area_id_area`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_avaliacao_livro1`
+    FOREIGN KEY (`livro_id_livro` , `livro_area_id_area`)
+    REFERENCES `mydb`.`livro` (`id_livro` , `area_id_area`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
