@@ -171,6 +171,7 @@ def cadastrar_livro():
     vartitulo = "cadastrar"
     return render_template("cadastrar_livro.html", titulo=vartitulo)
 
+
 @app.route('/cadastrar_pdf', methods=['GET', 'POST'])
 def cadastrar_pdf():
     if request.method == "POST":
@@ -193,6 +194,7 @@ def cadastrar_pdf():
     vartitulo = "cadastrar"
     return render_template("cadastrar_pdf.html", titulo=vartitulo)
 
+
 @app.route('/livros', methods=['GET', 'POST'])
 def livros():
     dao = LivroDAO(get_db())
@@ -205,6 +207,7 @@ def livros():
     livros_db = dao.listar_livro()
     return render_template("livros.html", livros=livros_db)
 
+
 @app.route('/Pdf', methods=['GET', 'POST'])
 def Pdf():
     dao = PdfDAO(get_db())
@@ -216,6 +219,7 @@ def Pdf():
 
     Pdf_db = dao.listar_Pdf()
     return render_template("Pdf.html", livros=Pdf_db)
+
 
 @app.route('/consulta/<int:area_id_area>', methods=['GET'])
 def consulta(area_id_area):
