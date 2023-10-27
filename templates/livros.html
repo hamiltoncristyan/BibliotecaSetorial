@@ -157,7 +157,11 @@
                       <td>{{ l[1] }}</td>
                       <td>{{ l[2] }}</td>
                       <td>{{ l[3] }}</td>
-                       <td><button class="btn">Solicitar</button></td>
+                      <td>
+                        <form action="/livro_detalhes/{{ l[0] }}" method="get">
+                            <button type="submit" class="btn">Solicitar</button>
+                        </form>
+                      </td>
                       <td>
                         <form method="post">
                           <input type="hidden" name="id_livro" value="{{ l[0] }}">
