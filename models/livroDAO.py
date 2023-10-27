@@ -75,7 +75,7 @@ class LivroDAO:
             if id_livro is not None:
                 # pegar somente um produto
                 sql = "SELECT * FROM Livro WHERE id_livro=%s"
-                cursor.execute(sql, (int(id_livro),))
+                cursor.execute(sql, (id_livro,))
                 livro = cursor.fetchone()
                 return livro
             else:
@@ -83,7 +83,7 @@ class LivroDAO:
                 sql = "SELECT * FROM Livro"
                 cursor.execute(sql)
                 livros = cursor.fetchall()
-                return livros
+                return livro
 
         except:
             return None

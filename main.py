@@ -212,7 +212,7 @@ def livros():
 def livro_detalhes(livro_id):
 
     dao = LivroDAO(get_db())
-    livro = dao.listar_livro_id(int(livro_id))
+    livro = dao.listar_livro_id(livro_id)
 
     return render_template("livro_detalhes.html", livro=livro)
 

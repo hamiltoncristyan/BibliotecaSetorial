@@ -1100,7 +1100,7 @@ h2 {
 }
 
 .product-detail .product-content .title h2 {
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 5px;
 }
 
@@ -1125,7 +1125,7 @@ h2 {
 .product-detail .product-content .p-size h4,
 .product-detail .product-content .p-color h4 {
   display: inline-block;
-  width: 80px;
+  width: 120px;
   font-size: 18px;
   font-weight: 700;
   margin-right: 5px;
@@ -1300,7 +1300,7 @@ h2 {
 
 .sidebar-widget .title {
   position: relative;
-  font-size: 22px;
+  font-size: 20px;
   text-transform: capitalize;
   margin-bottom: 15px;
 }
