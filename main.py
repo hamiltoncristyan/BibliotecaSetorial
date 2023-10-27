@@ -9,6 +9,8 @@ from models.exemplar import Exemplar
 from models.exemplarDAO import ExemplarDAO
 from models.livro import Livro
 from models.livroDAO import LivroDAO
+from models.pdf import pdf
+from models.pdfDAO import PdfDAO
 from models.emprestimo import Emprestimo
 from models.emprestimoDAO import EmprestimoDAO
 from suapapi import Suap
@@ -169,6 +171,27 @@ def cadastrar_livro():
     vartitulo = "cadastrar"
     return render_template("cadastrar_livro.html", titulo=vartitulo)
 
+@app.route('/cadastrar_pdf', methods=['GET', 'POST'])
+def cadastrar_pdf():
+    if request.method == "POST":
+        nome = request.form['nome']
+        autor = request.form['autor']
+        area_id_area = request.form['area']
+        quantidade_pag = request.form['quantidade_pag']
+        pdfcol = request.form['pdfcol']
+
+        PDF = pdf(nome, autor, quantidade_pag, area_id_area, pdfcol)
+
+        dao = PdfDAO(get_db())
+        codigo = dao.inserir(PDF)
+
+        if codigo > 0:
+            flash("Cadastrado com sucesso! Código %d" % codigo, "sucess")
+        else:
+            flash("Erro ao cadastrar!", "danger")
+
+    vartitulo = "cadastrar"
+    return render_template("cadastrar_pdf.html", titulo=vartitulo)
 
 @app.route('/livros', methods=['GET', 'POST'])
 def livros():
@@ -182,6 +205,17 @@ def livros():
     livros_db = dao.listar_livro()
     return render_template("livros.html", livros=livros_db)
 
+@app.route('/Pdf', methods=['GET', 'POST'])
+def Pdf():
+    dao = PdfDAO(get_db())
+
+    if request.method == 'POST':
+        id_Pdf = request.form['id_Pdf']
+        dao.excluir(id_Pdf)
+        return redirect('/Pdf')
+
+    Pdf_db = dao.listar_Pdf()
+    return render_template("Pdf.html", livros=Pdf_db)
 
 @app.route('/consulta/<int:area_id_area>', methods=['GET'])
 def consulta(area_id_area):

@@ -1,79 +1,79 @@
-class LivroDAO:
+class PdfDAO:
     def __init__(self, con):
         self.con = con
 
-    def inserir(self, livro):
+    def inserir(self, pdf):
 
         try:
-            sql = "INSERT INTO livro (nome, autor, quantidade_pag, area_id_area, link_capa) VALUES(%s, %s, %s, %s, %s)"
+            sql = "INSERT INTO pdf (nome, autor, quantidade_pag, area_id_area, pdfcol) VALUES(%s, %s, %s, %s, %s)"
             cursor = self.con.cursor()
-            cursor.execute(sql, (livro.nome, livro.autor, livro.quantidade_pag, livro.area_id_area, livro.link_capa))
+            cursor.execute(sql, (pdf.nome, pdf.autor, pdf.quantidade_pag, pdf.area_id_area, pdf.pdfcol))
 
             self.con.commit()
-            id_livro = cursor.lastrowid
-            return id_livro
+            id_pdf = cursor.lastrowid
+            return id_pdf
 
         except:
             return 0
 
     def autenticar(self, nome):
         try:
-            sql = "SELECT * FROM Livro WHERE livro=%s"
+            sql = "SELECT * FROM pdf WHERE Pdf=%s"
 
             cursor = self.con.cursor()
             cursor.execute(sql, (nome))
 
-            livro = cursor.fetchone()  # lastrowid, fetchone, fetchall
-            return livro
+            Pdf = cursor.fetchone()  # lastrowid, fetchone, fetchall
+            return Pdf
         except:
             return None
 
-    def listar_livro(self):
+    def listar_Pdf(self):
         try:
             cursor = self.con.cursor()
-            sql = "SELECT * FROM Livro"
+            sql = "SELECT * FROM Pdf"
             cursor.execute(sql)
-            livro = cursor.fetchall()
-            return livro
+            Pdf = cursor.fetchall()
+            return Pdf
 
         except:
             return None
 
-    def listar_livro_area(self, area_id_area):
+    def listar_Pdf_area(self, area_id_area):
         try:
             cursor = self.con.cursor()
             if area_id_area is not None:
-                sql = "SELECT * FROM Livro WHERE area_id_area = %s"
+                sql = "SELECT * FROM Pdf WHERE area_id_area = %s"
                 cursor.execute(sql, (area_id_area,))
-                livro_area = cursor.fetchall()
-                return livro_area
+                Pdf_area = cursor.fetchall()
+                return Pdf_area
         except:
             return None
 
-    def listar_livro_nome(self, nome=None):
+    def listar_Pdf_nome(self, nome=None):
         try:
             cursor = self.con.cursor()
             if nome is not None:
                 # pegar somente um produto
-                sql = "SELECT * FROM Livro WHERE nome=%s"
+                sql = "SELECT * FROM Pdf WHERE nome=%s"
                 cursor.execute(sql, (nome))
-                livro = cursor.fetchone()
-                return livro
+                Pdf = cursor.fetchone()
+                return Pdf
             else:
                 # pegar todas os produtos
-                sql = "SELECT * FROM Livro"
+                sql = "SELECT * FROM Pdf"
                 cursor.execute(sql)
-                livros = cursor.fetchall()
-                return livros
+                Pdf = cursor.fetchall()
+                return Pdf
 
         except:
             return None
 
-    def excluir(self, id_livro):
+    def excluir(self, id_Pdf):
         try:
-            sql = "DELETE FROM Livro WHERE id_livro = %s"
+            sql = "DELETE FROM Pdf WHERE id_Pdf = %s"
             cursor = self.con.cursor()
-            cursor.execute(sql, (id_livro,))
+            cursor.execute(sql, (id_Pdf,))
             self.con.commit()
             return cursor.rowcount
         except:
