@@ -208,7 +208,7 @@ def livros():
     return render_template("livros.html", livros=livros_db)
 
 
-@app.route('/Pdf', methods=['GET', 'POST'])
+@app.route('/pdf', methods=['GET', 'POST'])
 def Pdf():
     dao = PdfDAO(get_db())
 

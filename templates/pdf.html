@@ -40,8 +40,10 @@
             <a href="/painel" class="nav-item nav-link active">Início</a>
             <a href="/login" class="nav-item nav-link">Login</a>
             <a href="/livros" class="nav-item nav-link">Livros</a>
+            <a href="/pdf" class="'nav-item nav-link">PDF</a>
             <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livros</a>
-            <a href="templates/my-account.html" class="nav-item nav-link">Minha conta</a>
+            <a href="/cadastrar_pdf" class="'nav-item nav-link">Cadastrar PDF</a>
+            <a href="/minha_conta" class="nav-item nav-link">Minha conta</a>
             <div class="nav-item dropdown">
             </div>
           </div>
@@ -143,8 +145,8 @@
                   </tr>
                 </thead>
                 <tbody class="align-middle">
-                {% if livros %}
-                  {% for l in livros %}
+                {% if pdf %}
+                  {% for l in pdf %}
                     <tr>
                       <td>
                         <div>
@@ -158,7 +160,7 @@
                        <td><button class="btn">Solicitar</button></td>
                       <td>
                         <form method="post">
-                          <input type="hidden" name="id_livro" value="{{ l[0] }}">
+                          <input type="hidden" name="id_pdf" value="{{ l[0] }}">
                           <button type="submit"> Excluir </button>
                         </form>
                       </td>
@@ -189,6 +191,10 @@
 
   <!-- Template Javascript -->
   <script src="static/js/main.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
