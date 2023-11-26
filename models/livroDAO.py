@@ -83,7 +83,7 @@ class LivroDAO:
                 sql = "SELECT * FROM Livro"
                 cursor.execute(sql)
                 livros = cursor.fetchall()
-                return livro
+                return livros
 
         except:
             return None

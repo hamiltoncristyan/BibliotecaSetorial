@@ -72,18 +72,6 @@
                             <button><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="user">
-                            <a href="wishlist.html" class="btn wishlist">
-                                <i class="fa fa-heart"></i>
-                                <span>(0)</span>
-                            </a>
-                            <a href="cart.html" class="btn cart">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>(0)</span>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -102,38 +90,38 @@
                                     </div>
                                 </div>
                                 <div class="col-md-7">
+
                                     <div class="product-content">
 
-                                                <div class="title"><h2>{{  livro[1]  }}</h2></div>
-                                                <div class="ratting">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="p-size">
-                                                    <h4>ID do Livro:</h4>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <span type="button" class="btn">{{ livro[0] }}</span>
-                                                    </div>
-                                                </div>
+                                        <div class="title"><h2>{{  livro[1]  }}</h2></div>
 
-                                                <div class="p-size">
-                                                    <h4>Quant. de Páginas:</h4>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <span type="button" class="btn">{{ livro[3] }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="p-size">
-                                                    <h4>Autor:</h4>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <span type="button" class="btn">{{ livro[2] }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="action">
-                                                    <a class="btn" href="/solicitar_emprestimo"><i class="fa fa-book"></i>Solicitar Empréstimo</a>
-                                                </div>
+                                        <div class="p-size">
+                                            <h4>ID do Livro:</h4>
+                                            <div class="btn-group btn-group-sm">
+                                                <span type="button" class="btn">{{ livro[0] }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="p-size">
+                                            <h4>Quant. de Páginas:</h4>
+                                            <div class="btn-group btn-group-sm">
+                                                <span type="button" class="btn">{{ livro[3] }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="p-size">
+                                            <h4>Autor:</h4>
+                                            <div class="btn-group btn-group-sm">
+                                                <span type="button" class="btn">{{ livro[2] }}</span>
+                                            </div>
+                                        </div>
+                                            <input type="hidden" name="livro_id_livro" value="{{ livro[0] }}">
+                                            <input type="hidden" name="livro_area_id_area" value="{{ livro[4] }}">
+                                        <div class="action">
+                                            <a class="btn" href="/solicitar_emprestimo"><i class="fa fa-book"></i>Solicitar Empréstimo</a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -159,24 +147,31 @@
                                     </div>
                                     <div id="reviews" class="container tab-pane fade">
                                         <div class="reviews-submitted">
-                                            <div class="reviewer">Carla Adrielly</div>
-                                            <p>
-                                                eu gostei muito do livro, me ajudou bastante na minha faculdade. Livro completo e bem referenciado
-                                            </p>
+                                            {% if avaliacao %}
+
+                                                {% for a in avaliacao %}
+
+                                                    <div class="reviewer">{{ a[1] }}</div>
+                                                    <p>{{ a[3] }}</p>
+
+                                                {% endfor %}
+
+                                            {% else %}
+                                                <p>Nenhuma avaliação foi encontrada</p>
+                                            {% endif %}
                                         </div>
                                         <div class="reviews-submit">
                                             <h4>Faça sua avaliação:</h4>
                                             <div class="row form">
                                                 <form class="col-md-6" method="POST" action="/cadastrar_avaliacao">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Nome">
+                                                        <input type="text" class="form-control" placeholder="Nome" name="nome">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control" placeholder="Email">
+                                                        <textarea class="form-control" name="avaliacao" rows="5" placeholder="Avaliação"></textarea>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <textarea class="form-control" rows="5" placeholder="Avaliação"></textarea>
-                                                    </div>
+                                                    <input type="hidden" name="livro_id_livro" value="{{ livro[0] }}">
+                                                    <input type="hidden" name="livro_area_id_area" value="{{ livro[4] }}">
                                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                                 </form>
                                             </div>

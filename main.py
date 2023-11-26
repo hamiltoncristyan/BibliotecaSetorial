@@ -1,7 +1,6 @@
 from flask import Flask, g, render_template, request, redirect, url_for, flash, session
 import mysql.connector
-from datetime import timedelta
-
+from datetime import timedelta, date
 
 from models.usuario import Usuario
 from models.usuarioDAO import UsuarioDAO
@@ -13,6 +12,9 @@ from models.pdf import pdf
 from models.pdfDAO import PdfDAO
 from models.emprestimo import Emprestimo
 from models.emprestimoDAO import EmprestimoDAO
+from models.avaliacao import Avaliacao
+from models.avaliacaoDAO import AvaliacaoDAO
+
 from suapapi import Suap
 
 app = Flask(__name__)
@@ -30,14 +32,13 @@ app.auth = {
     'painel_aluno': {0: 0, 1: 1},
     'logout': {0: 1, 1: 1},
     'login': {0: 1, 1: 1},
-    #'cadastrar_livro': {0: 1, 1: 0}
+    # 'cadastrar_livro': {0: 1, 1: 0}
 }
-
 
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 
-#@app.before_request
+# @app.before_request
 def autorizacao():
     acao = request.path[1:]
     acao = acao.split('/')
@@ -101,6 +102,7 @@ def login():
 
             session['vinculo']['matricula'] = matricula
             session['token'] = token
+            print(token)
             return render_template('painel')
         else:
 
@@ -114,9 +116,8 @@ def login():
             curso = user['vinculo']['curso']
             email = user['email']
             link_foto = "https://suap.ifrn.edu.br" + user['url_foto_150x200']
-            senha = request.form['senha']
 
-            usuario = Usuario(matricula, nome, curso, email, vinculo, link_foto, senha)
+            usuario = Usuario(matricula, nome, curso, email, vinculo, link_foto)
 
             dao = UsuarioDAO(get_db())
             codigo = dao.inserir(usuario)
@@ -130,8 +131,8 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/painel_aluno', methods=['GET', 'POST'])
-def painel_aluno():
+@app.route('/painel', methods=['GET', 'POST'])
+def painel():
     daoLivro = LivroDAO(get_db())
     livro_db = daoLivro.listar_livro()
     return render_template("painel.html", livro=livro_db)
@@ -146,7 +147,8 @@ def minha_conta():
     tipo_vinculo = user['tipo_vinculo']
     nome = user['vinculo']['nome']
     matricula = user['matricula']
-    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome,  matricula=matricula, tipo_vinculo=tipo_vinculo)
+    return render_template("my-account.html", url_foto_150x200=url_foto_150x200, nome=nome, matricula=matricula,
+                           tipo_vinculo=tipo_vinculo)
 
 
 @app.route('/cadastrar_livro', methods=['GET', 'POST'])
@@ -157,9 +159,9 @@ def cadastrar_livro():
         area_id_area = request.form['area']
         quantidade_pag = request.form['quantidade_pag']
         link_capa = request.form['link_capa']
-        descrição = request.form['descrição']
+        descricao = request.form['descricao']
 
-        livro = Livro(nome, autor, quantidade_pag, area_id_area, link_capa, descrição)
+        livro = Livro(nome, autor, quantidade_pag, area_id_area, link_capa, descricao)
 
         dao = LivroDAO(get_db())
         codigo = dao.inserir(livro)
@@ -209,7 +211,6 @@ def livros():
     return render_template("livros.html", livros=livros_db)
 
 
-
 @app.route('/pdf', methods=['GET', 'POST'])
 def pdf():
     dao = PdfDAO(get_db())
@@ -222,13 +223,20 @@ def pdf():
     pdf_db = dao.listar_Pdf()
     return render_template("pdf.html", pdf=pdf_db)
 
+
 @app.route('/livro_detalhes/<int:livro_id>', methods=['GET'])
 def livro_detalhes(livro_id):
 
-    dao = LivroDAO(get_db())
-    livro = dao.listar_livro_id(livro_id)
+    dao_avaliacao = AvaliacaoDAO(get_db())
+    avaliacao = dao_avaliacao.listar_avaliacao_livro(livro_id)
 
-    return render_template("livro_detalhes.html", livro=livro)
+    dao_livro = LivroDAO(get_db())
+    livro = dao_livro.listar_livro_id(livro_id)
+
+    print(avaliacao)
+    print(livro)
+
+    return render_template("livro_detalhes.html", livro=livro, avaliacao=avaliacao)
 
 
 @app.route('/cadastrar_avaliacao', methods=['POST'])
@@ -237,8 +245,21 @@ def cadastrar_avaliacao():
     if request.method == "POST":
         nome = request.form['nome']
         data = date.today()
+        avaliacao = request.form['avaliacao']
+        livro_id_livro = request.form['livro_id_livro']
+        livro_area_id_area = request.form['livro_area_id_area']
 
+        avaliacao = Avaliacao(nome, data, avaliacao, livro_id_livro, livro_area_id_area)
 
+        dao = AvaliacaoDAO(get_db())
+        codigo = dao.inserir(avaliacao)
+
+    if codigo > 0:
+        print("Avaliação Cadastrada")
+    else:
+        print("Avaliação NÃO Cadastrada")
+
+    return redirect(url_for('livro_detalhes', livro_id=livro_id_livro))
 
 
 @app.route('/Pdf', methods=['GET', 'POST'])
