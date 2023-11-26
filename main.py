@@ -241,7 +241,9 @@ def cadastrar_avaliacao():
 
     if request.method == "POST":
         nome = request.form['nome']
-        data = date.today()
+        data_atual = date.today()
+        data = data_atual.strftime("%d-%m-%Y")
+        print(data)
         avaliacao = request.form['avaliacao']
         livro_id_livro = request.form['livro_id_livro']
         livro_area_id_area = request.form['livro_area_id_area']

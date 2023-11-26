@@ -131,10 +131,10 @@
                             <div class="col-lg-12">
                                 <ul class="nav nav-pills nav-justified">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="pill" href="#description">Description</a>
+                                        <a class="nav-link active" data-toggle="pill" href="#description">Descrição</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="pill" href="#reviews">Reviews (1)</a>
+                                        <a class="nav-link" data-toggle="pill" href="#reviews">Avaliações </a>
                                     </li>
                                 </ul>
 
@@ -151,7 +151,7 @@
 
                                                 {% for a in avaliacao %}
 
-                                                    <div class="reviewer">{{ a[1] }}</div>
+                                                    <div class="reviewer">{{ a[1] }} - <span> {{ a[2] }}</span></div>
                                                     <p>{{ a[3] }}</p>
 
                                                 {% endfor %}
