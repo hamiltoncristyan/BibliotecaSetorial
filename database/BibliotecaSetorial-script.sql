@@ -93,7 +93,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `mydb`.`pdf`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`pdf` (
-  `id_pdf` INT(11) NOT NULL,
+  `id_pdf` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `area` VARCHAR(45) NOT NULL,
   `autor` VARCHAR(45) NOT NULL,
@@ -115,7 +115,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `mydb`.`avaliacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`avaliacao` (
-  `id_avaliacao` INT NOT NULL,
+  `id_avaliacao` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `data` DATE NOT NULL,
   `avaliacao` VARCHAR(500) NOT NULL,
