@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`area` (
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_area`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -37,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
   `quantidade_pag` INT(11) NOT NULL,
   `area_id_area` INT(11) NOT NULL,
   `link_capa` VARCHAR(200) NOT NULL,
+  `descricao` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`id_livro`, `area_id_area`),
   INDEX `fk_obra_setor1_idx` (`area_id_area` ASC) ,
   CONSTRAINT `fk_obra_setor1`
@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8;
 
 
