@@ -31,7 +31,6 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
   `id_livro` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
-  `area` VARCHAR(45) NOT NULL,
   `autor` VARCHAR(45) NOT NULL,
   `quantidade_pag` INT(11) NOT NULL,
   `area_id_area` INT(11) NOT NULL,
