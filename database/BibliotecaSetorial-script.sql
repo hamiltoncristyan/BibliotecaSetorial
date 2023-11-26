@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`livro` (
   `quantidade_pag` INT(11) NOT NULL,
   `area_id_area` INT(11) NOT NULL,
   `link_capa` VARCHAR(200) NOT NULL,
-  `descricao` VARCHAR(500) NOT NULL,
+  `descricao` VARCHAR(2000) NOT NULL,
   PRIMARY KEY (`id_livro`, `area_id_area`),
   INDEX `fk_obra_setor1_idx` (`area_id_area` ASC) ,
   CONSTRAINT `fk_obra_setor1`
