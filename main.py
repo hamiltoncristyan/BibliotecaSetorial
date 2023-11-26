@@ -157,8 +157,9 @@ def cadastrar_livro():
         area_id_area = request.form['area']
         quantidade_pag = request.form['quantidade_pag']
         link_capa = request.form['link_capa']
+        descrição = request.form['descrição']
 
-        livro = Livro(nome, autor, quantidade_pag, area_id_area, link_capa)
+        livro = Livro(nome, autor, quantidade_pag, area_id_area, link_capa, descrição)
 
         dao = LivroDAO(get_db())
         codigo = dao.inserir(livro)
@@ -226,6 +227,13 @@ def livro_detalhes(livro_id):
 
     dao = LivroDAO(get_db())
     livro = dao.listar_livro_id(livro_id)
+
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+        avaliacao = request.form['avaliacao']
+
+
 
     return render_template("livro_detalhes.html", livro=livro)
 
