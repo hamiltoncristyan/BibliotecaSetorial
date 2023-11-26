@@ -5,11 +5,10 @@ class UsuarioDAO:
     def inserir(self, usuario):
 
         try:
-            sql = "INSERT INTO usuario(matricula, nome, curso, email, vinculo, link_foto, senha) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO usuario(matricula, nome, curso, email, vinculo, link_foto) VALUES (%s, %s, %s, %s, %s, %s)"
             cursor = self.con.cursor()
             cursor.execute(sql, (
-            usuario.matricula, usuario.nome, usuario.curso, usuario.email, usuario.vinculo, usuario.link_foto,
-            usuario.senha))
+            usuario.matricula, usuario.nome, usuario.curso, usuario.email, usuario.vinculo, usuario.link_foto))
 
             self.con.commit()
             matricula = cursor.lastrowid
