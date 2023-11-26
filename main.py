@@ -116,6 +116,7 @@ def login():
             curso = user['vinculo']['curso']
             email = user['email']
             link_foto = "https://suap.ifrn.edu.br" + user['url_foto_150x200']
+            matricula = user['matricula']
 
             usuario = Usuario(matricula, nome, curso, email, vinculo, link_foto)
 
@@ -233,7 +234,35 @@ def livro_detalhes(livro_id):
     dao_livro = LivroDAO(get_db())
     livro = dao_livro.listar_livro_id(livro_id)
 
-    return render_template("livro_detalhes.html", livro=livro, avaliacao=avaliacao)
+    token = session.get('token')
+    api = Suap()
+    user = api.getMeusDados(token)
+    matricula = user['matricula']
+
+    return render_template("livro_detalhes.html", livro=livro, avaliacao=avaliacao, matricula=matricula)
+
+
+@app.route('/solicitar_emprestimo', methods=['POST'])
+def solicitar_emprestimo():
+    if request.method == "POST":
+        livro_id_livro = request.form['livro_id_livro']
+        livro_area_id_area = request.form['livro_area_id_area']
+        usuario_matricula = request.form['usuario_matricula']
+        data_emprestimo = date.today()
+        data_devolucao = data_emprestimo + timedelta(days=15)
+        estado = "Pendente"
+
+        dao = EmprestimoDAO(get_db())
+        emprestimo = Emprestimo(livro_id_livro, livro_area_id_area, usuario_matricula, data_emprestimo, data_devolucao, estado)
+
+        codigo = dao.inserir(emprestimo)
+
+        if codigo is not None:
+            print("Empréstimo Cadastrado")
+        else:
+            print("Empréstimo NÃO Cadastrado")
+
+    return redirect(url_for('livros'))
 
 
 @app.route('/cadastrar_avaliacao', methods=['POST'])
@@ -241,9 +270,7 @@ def cadastrar_avaliacao():
 
     if request.method == "POST":
         nome = request.form['nome']
-        data_atual = date.today()
-        data = data_atual.strftime("%d-%m-%Y")
-        print(data)
+        data = date.today()
         avaliacao = request.form['avaliacao']
         livro_id_livro = request.form['livro_id_livro']
         livro_area_id_area = request.form['livro_area_id_area']

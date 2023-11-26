@@ -39,7 +39,9 @@
             <a href="/painel" class="nav-item nav-link active">Início</a>
             <a href="/login" class="nav-item nav-link">Login</a>
             <a href="/livros" class="nav-item nav-link">Livros</a>
+            <a href="/pdf" class="'nav-item nav-link">PDF</a>
             <a href="/cadastrar_livro" class="nav-item nav-link">Cadastrar Livros</a>
+            <a href="/cadastrar_pdf" class="'nav-item nav-link">Cadastrar PDF</a>
             <a href="/minha_conta" class="nav-item nav-link">Minha conta</a>
             <div class="nav-item dropdown">
             </div>
@@ -115,12 +117,17 @@
                                                 <span type="button" class="btn">{{ livro[2] }}</span>
                                             </div>
                                         </div>
+                                        <form method="POST" action="/solicitar_emprestimo">
+
                                             <input type="hidden" name="livro_id_livro" value="{{ livro[0] }}">
                                             <input type="hidden" name="livro_area_id_area" value="{{ livro[4] }}">
-                                        <div class="action">
-                                            <a class="btn" href="/solicitar_emprestimo"><i class="fa fa-book"></i>Solicitar Empréstimo</a>
-                                        </div>
+                                            <input type="hidden" name="usuario_matricula" value="{{ matricula }}">
 
+                                            <div class="action">
+                                                <button type="submit" class="btn"><i class="fa fa-book"></i>Solicitar Empréstimo</button>
+                                            </div>
+
+                                        </form>
 
                                     </div>
                                 </div>
