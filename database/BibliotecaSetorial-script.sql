@@ -52,7 +52,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `mydb`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
-  `matricula` INT(11) NOT NULL,
+  `matricula` INT(20) NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
   `curso` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
