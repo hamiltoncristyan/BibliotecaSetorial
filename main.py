@@ -233,9 +233,6 @@ def livro_detalhes(livro_id):
     dao_livro = LivroDAO(get_db())
     livro = dao_livro.listar_livro_id(livro_id)
 
-    print(avaliacao)
-    print(livro)
-
     return render_template("livro_detalhes.html", livro=livro, avaliacao=avaliacao)
 
 
