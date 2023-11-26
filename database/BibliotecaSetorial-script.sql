@@ -120,19 +120,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`avaliacao` (
   `nome` VARCHAR(45) NOT NULL,
   `data` DATE NOT NULL,
   `avaliacao` VARCHAR(500) NOT NULL,
-  `estrelas` INT NOT NULL,
-  `pdf_id_pdf` INT(11) NULL,
-  `pdf_area_id_area` INT(11) NOT NULL,
   `livro_id_livro` INT(11) NULL,
   `livro_area_id_area` INT(11) NOT NULL,
-  PRIMARY KEY (`id_avaliacao`, `pdf_id_pdf`, `pdf_area_id_area`),
-  INDEX `fk_avaliacao_pdf1_idx` (`pdf_id_pdf` ASC, `pdf_area_id_area` ASC) ,
+  PRIMARY KEY (`id_avaliacao`, `livro_id_livro`, `livro_area_id_area`),
   INDEX `fk_avaliacao_livro1_idx` (`livro_id_livro` ASC, `livro_area_id_area` ASC) ,
-  CONSTRAINT `fk_avaliacao_pdf1`
-    FOREIGN KEY (`pdf_id_pdf` , `pdf_area_id_area`)
-    REFERENCES `mydb`.`pdf` (`id_pdf` , `area_id_area`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_avaliacao_livro1`
     FOREIGN KEY (`livro_id_livro` , `livro_area_id_area`)
     REFERENCES `mydb`.`livro` (`id_livro` , `area_id_area`)
