@@ -31,7 +31,7 @@ class LivroDAO:
     def listar_livro(self):
         try:
             cursor = self.con.cursor()
-            sql = "SELECT * FROM Livro"
+            sql = "SELECT Livro.* FROM Livro LEFT JOIN EMPRESTIMO ON Livro.id_livro = EMPRESTIMO.livro_id_livro WHERE EMPRESTIMO.estado = 'Devolvido' OR EMPRESTIMO.livro_id_livro IS NULL;"
             cursor.execute(sql)
             livro = cursor.fetchall()
             return livro

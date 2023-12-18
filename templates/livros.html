@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Icon -->
-  <link href="static/logo/pen.png" rel="icon" type="image/png" >
+  <link href="{{ url_for('static', filename='logo/pen.png') }}" rel="icon" type="image/png">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
@@ -16,11 +16,13 @@
   <!-- CSS Libraries -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='lib/slick/slick.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='lib/slick/slick-theme.css') }}">
+
   <link href="static/lib/slick/slick.css" rel="stylesheet">
   <link href="static/lib/slick/slick-theme.css" rel="stylesheet">
 
-  <!-- Template Stylesheet -->
-  <link href="static/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -65,7 +67,7 @@
         <div class="col-md-3">
           <div class="logo">
             <a href="/painel">
-              <img src="static/logo/logo.png" alt="Logo">
+              <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">
             </a>
           </div>
         </div>
@@ -163,9 +165,9 @@
                         </form>
                       </td>
                       <td>
-                        <form method="post">
+                        <form method="POST">
                           <input type="hidden" name="id_livro" value="{{ l[0] }}">
-                          <button type="submit"> Excluir </button>
+                          <button type="submit">Excluir</button>
                         </form>
                       </td>
                     </tr>
@@ -188,13 +190,12 @@
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
   <!-- JavaScript Libraries -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-  <script src="static/lib/easing/easing.min.js"></script>
-  <script src="static/lib/slick/slick.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/slick/slick.min.js') }}"></script>
 
-  <!-- Template Javascript -->
-  <script src="static/js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
 </html>
